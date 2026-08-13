@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "project_license": "MIT",
+  "implementation_lane": "first-party-mit-addon-framework-and-athena-ctm-with-cobblefurnies-specific-profile-and-bbs-statue-path",
+  "baseline": {
+    "pack": "All the Mons 1.2.0",
+    "pack_commit": "c7bb230f21d14d26859d0b92548f089b3a493ad9",
+    "minecraft": "1.21.1",
+    "neoforge": "21.1.248",
+    "java": 21
+  },
+  "bluemap": {
+    "backport_version": "5.22-agent.backport-5.22-mc1.21.1-2",
+    "backport_commit": "9be321df995a1103808621d529eb72773e719d4d",
+    "api_commit": "285c9a60eff3ac2b0cab308ce1058d1565be0971",
+    "release_jar_sha256": "749f7647fa29764cea113114a7ab3259271bab3da22720989f2bd9fd1f3ba150",
+    "declared_license": "MIT",
+    "bundled": false
+  },
+  "artifacts": {
+    "cobblefurnies": {
+      "version": "1.2",
+      "file_name": "CobbleFurnies-neoforge-1.2.jar",
+      "size": 2343464,
+      "sha1": "451c445ff636c1e5821f13e3a3f40ee16ecb3342",
+      "sha256": "82894965d01bfb00fb6109ac275622a157d415ef0957d41fd6478b6d64ce34f8",
+      "curseforge_project_id": 1188698,
+      "curseforge_file_id": 8340192,
+      "modrinth_project_id": "AXY1OO9m",
+      "modrinth_version_id": "Ynk3uYUi",
+      "declared_license": "MIT",
+      "license_evidence": "exact JAR META-INF/neoforge.mods.toml",
+      "source_correlation": "not_asserted",
+      "bundled": false
+    },
+    "athena": {
+      "version": "4.0.6",
+      "file_name": "athena-neoforge-1.21.1-4.0.6.jar",
+      "size": 99944,
+      "sha1": "4bcbdf388bd5e387beca7c627224aac33584b55b",
+      "sha256": "43699885bbce3343916d4c5c4940cf0e3f9f6f02fdeb46e8655e121b42282ec5",
+      "modrinth_project_id": "b1ZV3DIJ",
+      "modrinth_version_id": "dJgL278E",
+      "declared_license": "MIT",
+      "license_evidence": "exact JAR META-INF/neoforge.mods.toml",
+      "source_correlation": "not_asserted",
+      "bundled": false
+    }
+  },
+  "first_party_reuse": {
+    "project": "BlueMap Chipped Add-on",
+    "repository": "https://github.com/jan-guenter/bluemap-chipped-addon",
+    "commit": "c474a82b6bfd1b4173d119cb1e053a5458167e4b",
+    "declared_license": "MIT",
+    "scope": "BlueMap add-on activation/profile/adapter framework and Athena connected-texture selection/emission implementation",
+    "artifact_bundled": false
+  },
+  "third_party_content_bundled": false,
+  "upstream_source_correlation_asserted": false
+}

@@ -1,0 +1,8 @@
+{
+  "id": "bluemap-cobblefurnies",
+  "name": "BlueMap CobbleFurnies Add-on",
+  "entrypoint": "io.github.janguenter.bluemap.cobblefurnies.BlueMapCobbleFurniesAddon",
+  "version": "${version}",
+  "dependencies": [],
+  "soft-dependencies": []
+}

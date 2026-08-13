@@ -1,0 +1,1066 @@
+{
+  "bluemap_view": "221.5:100:222:33.47:0:1.32946:0:0:perspective",
+  "camera": {
+    "pitch": 14,
+    "position": [
+      221.5,
+      108,
+      254.5
+    ],
+    "yaw": 180
+  },
+  "cases": [
+    {
+      "anchor": {
+        "x": 208,
+        "y": 100,
+        "z": 208
+      },
+      "case_id": "statue-ancient",
+      "family": "statue-bind-pose",
+      "index": 1,
+      "notes": "two-high south-facing bind pose",
+      "placements": [
+        {
+          "block": "cobblefurnies:statue_ancient[facing=south,half=lower]",
+          "x": 208,
+          "y": 100,
+          "z": 208
+        },
+        {
+          "block": "cobblefurnies:statue_ancient[facing=south,half=upper]",
+          "x": 208,
+          "y": 101,
+          "z": 208
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 212,
+        "y": 100,
+        "z": 208
+      },
+      "case_id": "statue-bulbasaur",
+      "family": "statue-bind-pose",
+      "index": 2,
+      "notes": "two-high south-facing bind pose",
+      "placements": [
+        {
+          "block": "cobblefurnies:statue_bulbasaur[facing=south,half=lower]",
+          "x": 212,
+          "y": 100,
+          "z": 208
+        },
+        {
+          "block": "cobblefurnies:statue_bulbasaur[facing=south,half=upper]",
+          "x": 212,
+          "y": 101,
+          "z": 208
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 216,
+        "y": 100,
+        "z": 208
+      },
+      "case_id": "statue-charmander",
+      "family": "statue-bind-pose",
+      "index": 3,
+      "notes": "two-high south-facing bind pose",
+      "placements": [
+        {
+          "block": "cobblefurnies:statue_charmander[facing=south,half=lower]",
+          "x": 216,
+          "y": 100,
+          "z": 208
+        },
+        {
+          "block": "cobblefurnies:statue_charmander[facing=south,half=upper]",
+          "x": 216,
+          "y": 101,
+          "z": 208
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 220,
+        "y": 100,
+        "z": 208
+      },
+      "case_id": "statue-pikachu",
+      "family": "statue-bind-pose",
+      "index": 4,
+      "notes": "two-high south-facing bind pose",
+      "placements": [
+        {
+          "block": "cobblefurnies:statue_pikachu[facing=south,half=lower]",
+          "x": 220,
+          "y": 100,
+          "z": 208
+        },
+        {
+          "block": "cobblefurnies:statue_pikachu[facing=south,half=upper]",
+          "x": 220,
+          "y": 101,
+          "z": 208
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 224,
+        "y": 100,
+        "z": 208
+      },
+      "case_id": "statue-squirtle",
+      "family": "statue-bind-pose",
+      "index": 5,
+      "notes": "two-high south-facing bind pose",
+      "placements": [
+        {
+          "block": "cobblefurnies:statue_squirtle[facing=south,half=lower]",
+          "x": 224,
+          "y": 100,
+          "z": 208
+        },
+        {
+          "block": "cobblefurnies:statue_squirtle[facing=south,half=upper]",
+          "x": 224,
+          "y": 101,
+          "z": 208
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 208,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "red-poke-wool",
+      "family": "ctm-isolated",
+      "index": 6,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 208,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 210,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "orange-poke-wool",
+      "family": "ctm-isolated",
+      "index": 7,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:orange_poke_wool",
+          "x": 210,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 212,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "yellow-poke-wool",
+      "family": "ctm-isolated",
+      "index": 8,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:yellow_poke_wool",
+          "x": 212,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 214,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "brown-poke-wool",
+      "family": "ctm-isolated",
+      "index": 9,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:brown_poke_wool",
+          "x": 214,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 216,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "lime-poke-wool",
+      "family": "ctm-isolated",
+      "index": 10,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:lime_poke_wool",
+          "x": 216,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 218,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "green-poke-wool",
+      "family": "ctm-isolated",
+      "index": 11,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:green_poke_wool",
+          "x": 218,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 220,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "cyan-poke-wool",
+      "family": "ctm-isolated",
+      "index": 12,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:cyan_poke_wool",
+          "x": 220,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 222,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "light_blue-poke-wool",
+      "family": "ctm-isolated",
+      "index": 13,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:light_blue_poke_wool",
+          "x": 222,
+          "y": 100,
+          "z": 216
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 208,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "blue-poke-wool",
+      "family": "ctm-isolated",
+      "index": 14,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:blue_poke_wool",
+          "x": 208,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 210,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "magenta-poke-wool",
+      "family": "ctm-isolated",
+      "index": 15,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:magenta_poke_wool",
+          "x": 210,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 212,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "purple-poke-wool",
+      "family": "ctm-isolated",
+      "index": 16,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:purple_poke_wool",
+          "x": 212,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 214,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "pink-poke-wool",
+      "family": "ctm-isolated",
+      "index": 17,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:pink_poke_wool",
+          "x": 214,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 216,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "white-poke-wool",
+      "family": "ctm-isolated",
+      "index": 18,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:white_poke_wool",
+          "x": 216,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 218,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "light_gray-poke-wool",
+      "family": "ctm-isolated",
+      "index": 19,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:light_gray_poke_wool",
+          "x": 218,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 220,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "gray-poke-wool",
+      "family": "ctm-isolated",
+      "index": 20,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:gray_poke_wool",
+          "x": 220,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 222,
+        "y": 100,
+        "z": 218
+      },
+      "case_id": "black-poke-wool",
+      "family": "ctm-isolated",
+      "index": 21,
+      "notes": "one isolated full cube",
+      "placements": [
+        {
+          "block": "cobblefurnies:black_poke_wool",
+          "x": 222,
+          "y": 100,
+          "z": 218
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 208,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "red-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 22,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:red_poke_wool_carpet",
+          "x": 208,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 210,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "orange-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 23,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:orange_poke_wool_carpet",
+          "x": 210,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 212,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "yellow-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 24,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:yellow_poke_wool_carpet",
+          "x": 212,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 214,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "brown-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 25,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:brown_poke_wool_carpet",
+          "x": 214,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 216,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "lime-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 26,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:lime_poke_wool_carpet",
+          "x": 216,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 218,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "green-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 27,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:green_poke_wool_carpet",
+          "x": 218,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 220,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "cyan-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 28,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:cyan_poke_wool_carpet",
+          "x": 220,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 222,
+        "y": 100,
+        "z": 224
+      },
+      "case_id": "light_blue-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 29,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:light_blue_poke_wool_carpet",
+          "x": 222,
+          "y": 100,
+          "z": 224
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 208,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "blue-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 30,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 208,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 210,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "magenta-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 31,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:magenta_poke_wool_carpet",
+          "x": 210,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 212,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "purple-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 32,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:purple_poke_wool_carpet",
+          "x": 212,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 214,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "pink-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 33,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:pink_poke_wool_carpet",
+          "x": 214,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 216,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "white-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 34,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:white_poke_wool_carpet",
+          "x": 216,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 218,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "light_gray-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 35,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:light_gray_poke_wool_carpet",
+          "x": 218,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 220,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "gray-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 36,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:gray_poke_wool_carpet",
+          "x": 220,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 222,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "black-poke-wool-carpet",
+      "family": "carpet-ctm-isolated",
+      "index": 37,
+      "notes": "one isolated one-sixteenth carpet",
+      "placements": [
+        {
+          "block": "cobblefurnies:black_poke_wool_carpet",
+          "x": 222,
+          "y": 100,
+          "z": 226
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 232,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "red-wool-open-l",
+      "family": "ctm-topology",
+      "index": 38,
+      "notes": "open L; southeast diagonal missing",
+      "placements": [
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 232,
+          "y": 100,
+          "z": 216
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 233,
+          "y": 100,
+          "z": 216
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 232,
+          "y": 100,
+          "z": 215
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 239,
+        "y": 100,
+        "z": 216
+      },
+      "case_id": "red-wool-full-three-by-three",
+      "family": "ctm-topology",
+      "index": 39,
+      "notes": "full 3-by-3",
+      "placements": [
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 238,
+          "y": 100,
+          "z": 215
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 239,
+          "y": 100,
+          "z": 215
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 240,
+          "y": 100,
+          "z": 215
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 238,
+          "y": 100,
+          "z": 216
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 239,
+          "y": 100,
+          "z": 216
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 240,
+          "y": 100,
+          "z": 216
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 238,
+          "y": 100,
+          "z": 217
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 239,
+          "y": 100,
+          "z": 217
+        },
+        {
+          "block": "cobblefurnies:red_poke_wool",
+          "x": 240,
+          "y": 100,
+          "z": 217
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 232,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "blue-carpet-open-l",
+      "family": "carpet-ctm-topology",
+      "index": 40,
+      "notes": "open L; southeast diagonal missing",
+      "placements": [
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 232,
+          "y": 100,
+          "z": 226
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 233,
+          "y": 100,
+          "z": 226
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 232,
+          "y": 100,
+          "z": 225
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 239,
+        "y": 100,
+        "z": 226
+      },
+      "case_id": "blue-carpet-full-three-by-three",
+      "family": "carpet-ctm-topology",
+      "index": 41,
+      "notes": "full 3-by-3",
+      "placements": [
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 238,
+          "y": 100,
+          "z": 225
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 239,
+          "y": 100,
+          "z": 225
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 240,
+          "y": 100,
+          "z": 225
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 238,
+          "y": 100,
+          "z": 226
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 239,
+          "y": 100,
+          "z": 226
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 240,
+          "y": 100,
+          "z": 226
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 238,
+          "y": 100,
+          "z": 227
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 239,
+          "y": 100,
+          "z": 227
+        },
+        {
+          "block": "cobblefurnies:blue_poke_wool_carpet",
+          "x": 240,
+          "y": 100,
+          "z": 227
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 208,
+        "y": 100,
+        "z": 236
+      },
+      "case_id": "stock-oak-chair",
+      "family": "stock-control",
+      "index": 42,
+      "notes": "outside the 37-ID route and rendered by stock BlueMap",
+      "placements": [
+        {
+          "block": "cobblefurnies:oak_chair[facing=south,waterlogged=false]",
+          "x": 208,
+          "y": 100,
+          "z": 236
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 212,
+        "y": 100,
+        "z": 236
+      },
+      "case_id": "stock-oak-table",
+      "family": "stock-control",
+      "index": 43,
+      "notes": "outside the 37-ID route and rendered by stock BlueMap",
+      "placements": [
+        {
+          "block": "cobblefurnies:oak_table[east=false,north=false,south=false,waterlogged=false,west=false]",
+          "x": 212,
+          "y": 100,
+          "z": 236
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 216,
+        "y": 100,
+        "z": 236
+      },
+      "case_id": "stock-red-sofa",
+      "family": "stock-control",
+      "index": 44,
+      "notes": "outside the 37-ID route and rendered by stock BlueMap",
+      "placements": [
+        {
+          "block": "cobblefurnies:red_sofa[facing=south,type=single,waterlogged=false]",
+          "x": 216,
+          "y": 100,
+          "z": 236
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 220,
+        "y": 100,
+        "z": 236
+      },
+      "case_id": "stock-red-cabinetry",
+      "family": "stock-control",
+      "index": 45,
+      "notes": "outside the 37-ID route and rendered by stock BlueMap",
+      "placements": [
+        {
+          "block": "cobblefurnies:red_cabinetry[facing=south,shape=default,waterlogged=false]",
+          "x": 220,
+          "y": 100,
+          "z": 236
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "x": 224,
+        "y": 100,
+        "z": 236
+      },
+      "case_id": "stock-poke-ball-desk",
+      "family": "stock-control",
+      "index": 46,
+      "notes": "outside the 37-ID route and rendered by stock BlueMap",
+      "placements": [
+        {
+          "block": "cobblefurnies:poke_ball_desk[facing=south]",
+          "x": 224,
+          "y": 100,
+          "z": 236
+        }
+      ]
+    }
+  ],
+  "cleanup_support_aabb": {
+    "max": [
+      244,
+      104,
+      240
+    ],
+    "min": [
+      204,
+      99,
+      204
+    ]
+  },
+  "logical_cells": 46,
+  "occupied_aabb": {
+    "max": [
+      240,
+      101,
+      236
+    ],
+    "min": [
+      208,
+      100,
+      208
+    ]
+  },
+  "physical_mod_blocks": 71,
+  "profile": "cobblefurnies-1.2-athena-4.0.6",
+  "schema": 1
+}
