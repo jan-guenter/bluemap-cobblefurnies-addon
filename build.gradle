@@ -1,0 +1,386 @@
+// SPDX-License-Identifier: MIT
+
+plugins {
+    id 'java-library'
+    id 'checkstyle'
+    id 'maven-publish'
+}
+
+group = addon_group
+version = addon_version
+
+base {
+    archivesName = artifact_id
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri('https://repo.bluecolored.de/releases')
+        content { includeGroupByRegex('de\\.bluecolored.*') }
+    }
+}
+
+dependencies {
+    compileOnly "de.bluecolored:bluemap-core:${bluemap_version}"
+    compileOnly 'org.jetbrains:annotations:23.0.0'
+
+    testImplementation "de.bluecolored:bluemap-core:${bluemap_version}"
+    testImplementation 'org.jetbrains:annotations:23.0.0'
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+    options.compilerArgs.addAll(['-Xlint:all', '-Werror'])
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    includeEmptyDirs = false
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
+    def cobblefurniesJar = providers.gradleProperty('cobblefurniesJar')
+    def athenaJar = providers.gradleProperty('athenaJar')
+    def releaseGate = providers.gradleProperty('releaseGate')
+            .map { it.toBoolean() }.orElse(false)
+    systemProperty 'cobblefurnies.releaseGate', releaseGate.get().toString()
+    if (cobblefurniesJar.isPresent()) {
+        systemProperty 'cobblefurniesJar', cobblefurniesJar.get()
+    }
+    if (athenaJar.isPresent()) {
+        systemProperty 'athenaJar', athenaJar.get()
+    }
+}
+
+tasks.named('processResources').configure {
+    inputs.property('version', project.version)
+    filesMatching('bluemap.addon.json') {
+        expand(version: project.version)
+    }
+}
+
+checkstyle {
+    toolVersion = '10.18.2'
+    configFile = file('config/checkstyle/checkstyle.xml')
+}
+
+tasks.withType(Checkstyle).configureEach {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes(
+                'Automatic-Module-Name': 'io.github.janguenter.bluemap.cobblefurnies',
+                'Implementation-Title': addon_name,
+                'Implementation-Version': project.version.toString()
+        )
+    }
+    from('LICENSE') {
+        into 'META-INF'
+        rename { 'LICENSE-bluemap-cobblefurnies-addon' }
+    }
+    from('NOTICE.md') {
+        into 'META-INF'
+        rename { 'NOTICE-bluemap-cobblefurnies-addon.md' }
+    }
+    from('THIRD_PARTY.md') {
+        into 'META-INF'
+        rename { 'THIRD_PARTY-bluemap-cobblefurnies-addon.md' }
+    }
+    from('provenance/upstreams.json') {
+        into 'META-INF/bluemap-cobblefurnies'
+    }
+}
+
+tasks.named('sourcesJar', Jar).configure {
+    from('LICENSE') {
+        into 'META-INF'
+        rename { 'LICENSE-bluemap-cobblefurnies-addon' }
+    }
+    from('NOTICE.md') {
+        into 'META-INF'
+        rename { 'NOTICE-bluemap-cobblefurnies-addon.md' }
+    }
+    from('THIRD_PARTY.md') {
+        into 'META-INF'
+        rename { 'THIRD_PARTY-bluemap-cobblefurnies-addon.md' }
+    }
+    from('provenance/upstreams.json') {
+        into 'META-INF/bluemap-cobblefurnies'
+    }
+}
+
+def productionJar = tasks.named('jar', Jar).flatMap { it.archiveFile }
+def publishedSourcesJar = tasks.named('sourcesJar', Jar).flatMap { it.archiveFile }
+tasks.register('verifyProductionJar') {
+    dependsOn tasks.named('jar')
+    inputs.file(productionJar)
+
+    doLast {
+        def jarFile = inputs.files.singleFile
+        def zip = new java.util.zip.ZipFile(jarFile)
+        try {
+            def archiveEntries = zip.entries().collect { it.name }
+            def entries = zip.entries().findAll { !it.directory }.collect { it.name }
+            def required = [
+                    'bluemap.addon.json',
+                    'assets/bluemap_cobblefurnies/blockstates/exact_shape.json',
+                    'bluemap-cobblefurnies/profiles/exact-artifacts.json',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/profile.json',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/definitions.tsv',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/statues.tsv',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/required-resources.tsv',
+                    'META-INF/LICENSE-bluemap-cobblefurnies-addon',
+                    'META-INF/NOTICE-bluemap-cobblefurnies-addon.md',
+                    'META-INF/THIRD_PARTY-bluemap-cobblefurnies-addon.md',
+                    'META-INF/bluemap-cobblefurnies/upstreams.json'
+            ]
+            def missing = required.findAll { !entries.contains(it) }
+            if (!missing.isEmpty()) {
+                throw new GradleException("Production JAR is missing: ${missing}")
+            }
+            def addon = new groovy.json.JsonSlurper().parseText(
+                    zip.getInputStream(zip.getEntry('bluemap.addon.json')).getText('UTF-8')
+            )
+            if (addon.id != addon_id
+                    || addon.entrypoint != 'io.github.janguenter.bluemap.cobblefurnies.BlueMapCobbleFurniesAddon'
+                    || addon.version != project.version.toString()
+                    || addon.dependencies != []
+                    || addon['soft-dependencies'] != []) {
+                throw new GradleException('BlueMap add-on metadata mismatch')
+            }
+            def foreignClasses = entries.findAll {
+                it.endsWith('.class')
+                        && !it.startsWith('io/github/janguenter/bluemap/cobblefurnies/')
+            }
+            def forbidden = archiveEntries.findAll {
+                it.endsWith('.jar')
+                        || it.contains('/4.0.2-athena-4.0.6/')
+                        || it == 'META-INF/neoforge.mods.toml'
+                        || it == 'fabric.mod.json'
+                        || it.endsWith('.mixins.json')
+                        || it.endsWith('.bbs.json')
+                        || it.endsWith('.geo.json')
+                        || it.endsWith('.png')
+                        || it.startsWith('assets/cobblefurnies/')
+                        || it.startsWith('earth/terrarium/')
+                        || it.startsWith('de/bluecolored/')
+                        || it.startsWith('de/maxhenkel/')
+                        || it.startsWith('net/minecraft/')
+                        || it.startsWith('net/neoforged/')
+            }
+            if (!foreignClasses.isEmpty() || !forbidden.isEmpty()) {
+                throw new GradleException(
+                        "Production JAR boundary mismatch: foreignClasses=${foreignClasses}, "
+                                + "forbidden=${forbidden}"
+                )
+            }
+            def packagedProvenance = zip.getInputStream(
+                    zip.getEntry('META-INF/bluemap-cobblefurnies/upstreams.json')
+            ).readAllBytes()
+            if (!java.util.Arrays.equals(
+                    packagedProvenance, file('provenance/upstreams.json').bytes
+            )) {
+                throw new GradleException('Packaged provenance differs from source lock')
+            }
+        } finally {
+            zip.close()
+        }
+    }
+}
+
+tasks.register('verifySourcesJar') {
+    dependsOn tasks.named('sourcesJar')
+    inputs.file(publishedSourcesJar)
+
+    doLast {
+        def jarFile = inputs.files.singleFile
+        def zip = new java.util.zip.ZipFile(jarFile)
+        try {
+            def archiveEntries = zip.entries().collect { it.name }
+            def entries = zip.entries().findAll { !it.directory }.collect { it.name }
+            def required = [
+                    'io/github/janguenter/bluemap/cobblefurnies/BlueMapCobbleFurniesAddon.java',
+                    'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap522/CobbleFurniesRenderer.java',
+                    'bluemap.addon.json',
+                    'bluemap-cobblefurnies/profiles/exact-artifacts.json',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/profile.json',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/definitions.tsv',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/statues.tsv',
+                    'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/required-resources.tsv',
+                    'META-INF/LICENSE-bluemap-cobblefurnies-addon',
+                    'META-INF/NOTICE-bluemap-cobblefurnies-addon.md',
+                    'META-INF/THIRD_PARTY-bluemap-cobblefurnies-addon.md',
+                    'META-INF/bluemap-cobblefurnies/upstreams.json'
+            ]
+            def missing = required.findAll { !entries.contains(it) }
+            if (!missing.isEmpty()) {
+                throw new GradleException("Sources JAR is missing: ${missing}")
+            }
+            def projectJava = entries.findAll { it.endsWith('.java') }
+            def foreignJava = projectJava.findAll {
+                !it.startsWith('io/github/janguenter/bluemap/cobblefurnies/')
+            }
+            def forbidden = archiveEntries.findAll {
+                it.endsWith('.class')
+                        || it.endsWith('.jar')
+                        || it.contains('/4.0.2-athena-4.0.6/')
+                        || it.endsWith('.bbs.json')
+                        || it.endsWith('.geo.json')
+                        || it.endsWith('.png')
+                        || it.startsWith('assets/cobblefurnies/')
+                        || it.startsWith('earth/terrarium/')
+                        || it.startsWith('de/bluecolored/')
+                        || it.startsWith('de/maxhenkel/')
+                        || it.startsWith('net/minecraft/')
+                        || it.startsWith('net/neoforged/')
+            }
+            if (projectJava.isEmpty() || !foreignJava.isEmpty() || !forbidden.isEmpty()) {
+                throw new GradleException(
+                        "Sources JAR boundary mismatch: foreignJava=${foreignJava}, "
+                                + "forbidden=${forbidden}"
+                )
+            }
+            def packagedProvenance = zip.getInputStream(
+                    zip.getEntry('META-INF/bluemap-cobblefurnies/upstreams.json')
+            ).readAllBytes()
+            if (!java.util.Arrays.equals(
+                    packagedProvenance, file('provenance/upstreams.json').bytes
+            )) {
+                throw new GradleException('Sources JAR provenance differs from source lock')
+            }
+        } finally {
+            zip.close()
+        }
+    }
+}
+
+tasks.named('check').configure {
+    dependsOn tasks.named('verifyProductionJar')
+    dependsOn tasks.named('verifySourcesJar')
+    dependsOn 'verifyGallery'
+    dependsOn 'verifyPythonTools'
+}
+
+tasks.register('verifyGallery', Exec) {
+    commandLine 'python3', 'gallery/generate.py', '--check'
+}
+
+tasks.register('verifyPythonTools', Exec) {
+    commandLine 'python3', '-m', 'unittest', 'discover',
+            '-s', 'tools/tests', '-p', 'test_*.py'
+}
+
+tasks.register('verifyPinnedArtifacts', Exec) {
+    def cobblefurniesJar = providers.gradleProperty('cobblefurniesJar')
+    def athenaJar = providers.gradleProperty('athenaJar')
+    doFirst {
+        if (!cobblefurniesJar.isPresent() || !athenaJar.isPresent()) {
+            throw new GradleException(
+                    'Set -PcobblefurniesJar and -PathenaJar to the exact ATM 1.2.0 artifacts.'
+            )
+        }
+    }
+    commandLine 'python3', 'tools/verify_pinned_artifacts.py',
+            '--cobblefurnies', cobblefurniesJar.getOrElse('missing'),
+            '--athena', athenaJar.getOrElse('missing')
+}
+
+tasks.named('test').configure {
+    if (providers.gradleProperty('releaseGate').map { it.toBoolean() }.getOrElse(false)) {
+        dependsOn tasks.named('verifyPinnedArtifacts')
+    }
+}
+
+publishing {
+    publications {
+        addon(MavenPublication) {
+            from components.java
+            artifactId = artifact_id
+            pom {
+                name = addon_name
+                description = 'Exact-profile BlueMap rendering for CobbleFurnies Poké Wool connected textures and five static statues.'
+                url = 'https://github.com/jan-guenter/bluemap-cobblefurnies-addon'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://spdx.org/licenses/MIT.html'
+                        distribution = 'repo'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/jan-guenter/bluemap-cobblefurnies-addon'
+                    connection = 'scm:git:https://github.com/jan-guenter/bluemap-cobblefurnies-addon.git'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = uri('https://maven.pkg.github.com/jan-guenter/bluemap-cobblefurnies-addon')
+            credentials {
+                username = System.getenv('GITHUB_ACTOR')
+                password = System.getenv('GITHUB_TOKEN')
+            }
+        }
+    }
+}
+
+tasks.register('verifyPublicationMetadata') {
+    dependsOn tasks.named('generatePomFileForAddonPublication')
+    dependsOn tasks.named('generateMetadataFileForAddonPublication')
+    def pomFile = layout.buildDirectory.file('publications/addon/pom-default.xml')
+    def moduleFile = layout.buildDirectory.file('publications/addon/module.json')
+    inputs.files(pomFile, moduleFile)
+
+    doLast {
+        String pom = pomFile.get().asFile.getText('UTF-8')
+        for (String exact : [
+                "<groupId>${addon_group}</groupId>",
+                "<artifactId>${artifact_id}</artifactId>",
+                "<version>${project.version}</version>",
+                '<name>BlueMap CobbleFurnies Add-on</name>',
+                '<description>Exact-profile BlueMap rendering for CobbleFurnies Poké Wool connected textures and five static statues.</description>',
+                '<name>MIT License</name>'
+        ]) {
+            if (!pom.contains(exact)) {
+                throw new GradleException("Publication POM is missing exact value: ${exact}")
+            }
+        }
+        def module = new groovy.json.JsonSlurper().parse(moduleFile.get().asFile)
+        if (module.component.group != addon_group
+                || module.component.module != artifact_id
+                || module.component.version != project.version.toString()) {
+            throw new GradleException('Gradle module coordinates changed')
+        }
+        def publishedFiles = module.variants.collectMany { it.files ?: [] }
+                .collect { it.name }.toSet()
+        if (publishedFiles != Set.of(
+                "${artifact_id}-${project.version}.jar",
+                "${artifact_id}-${project.version}-sources.jar"
+        )) {
+            throw new GradleException("Gradle module payload roster changed: ${publishedFiles}")
+        }
+    }
+}
+
+tasks.named('check').configure {
+    dependsOn tasks.named('verifyPublicationMetadata')
+}

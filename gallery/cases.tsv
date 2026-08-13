@@ -1,0 +1,47 @@
+index	case_id	family	x	y	z	placements	notes
+1	statue-ancient	statue-bind-pose	208	100	208	2	two-high south-facing bind pose
+2	statue-bulbasaur	statue-bind-pose	212	100	208	2	two-high south-facing bind pose
+3	statue-charmander	statue-bind-pose	216	100	208	2	two-high south-facing bind pose
+4	statue-pikachu	statue-bind-pose	220	100	208	2	two-high south-facing bind pose
+5	statue-squirtle	statue-bind-pose	224	100	208	2	two-high south-facing bind pose
+6	red-poke-wool	ctm-isolated	208	100	216	1	one isolated full cube
+7	orange-poke-wool	ctm-isolated	210	100	216	1	one isolated full cube
+8	yellow-poke-wool	ctm-isolated	212	100	216	1	one isolated full cube
+9	brown-poke-wool	ctm-isolated	214	100	216	1	one isolated full cube
+10	lime-poke-wool	ctm-isolated	216	100	216	1	one isolated full cube
+11	green-poke-wool	ctm-isolated	218	100	216	1	one isolated full cube
+12	cyan-poke-wool	ctm-isolated	220	100	216	1	one isolated full cube
+13	light_blue-poke-wool	ctm-isolated	222	100	216	1	one isolated full cube
+14	blue-poke-wool	ctm-isolated	208	100	218	1	one isolated full cube
+15	magenta-poke-wool	ctm-isolated	210	100	218	1	one isolated full cube
+16	purple-poke-wool	ctm-isolated	212	100	218	1	one isolated full cube
+17	pink-poke-wool	ctm-isolated	214	100	218	1	one isolated full cube
+18	white-poke-wool	ctm-isolated	216	100	218	1	one isolated full cube
+19	light_gray-poke-wool	ctm-isolated	218	100	218	1	one isolated full cube
+20	gray-poke-wool	ctm-isolated	220	100	218	1	one isolated full cube
+21	black-poke-wool	ctm-isolated	222	100	218	1	one isolated full cube
+22	red-poke-wool-carpet	carpet-ctm-isolated	208	100	224	1	one isolated one-sixteenth carpet
+23	orange-poke-wool-carpet	carpet-ctm-isolated	210	100	224	1	one isolated one-sixteenth carpet
+24	yellow-poke-wool-carpet	carpet-ctm-isolated	212	100	224	1	one isolated one-sixteenth carpet
+25	brown-poke-wool-carpet	carpet-ctm-isolated	214	100	224	1	one isolated one-sixteenth carpet
+26	lime-poke-wool-carpet	carpet-ctm-isolated	216	100	224	1	one isolated one-sixteenth carpet
+27	green-poke-wool-carpet	carpet-ctm-isolated	218	100	224	1	one isolated one-sixteenth carpet
+28	cyan-poke-wool-carpet	carpet-ctm-isolated	220	100	224	1	one isolated one-sixteenth carpet
+29	light_blue-poke-wool-carpet	carpet-ctm-isolated	222	100	224	1	one isolated one-sixteenth carpet
+30	blue-poke-wool-carpet	carpet-ctm-isolated	208	100	226	1	one isolated one-sixteenth carpet
+31	magenta-poke-wool-carpet	carpet-ctm-isolated	210	100	226	1	one isolated one-sixteenth carpet
+32	purple-poke-wool-carpet	carpet-ctm-isolated	212	100	226	1	one isolated one-sixteenth carpet
+33	pink-poke-wool-carpet	carpet-ctm-isolated	214	100	226	1	one isolated one-sixteenth carpet
+34	white-poke-wool-carpet	carpet-ctm-isolated	216	100	226	1	one isolated one-sixteenth carpet
+35	light_gray-poke-wool-carpet	carpet-ctm-isolated	218	100	226	1	one isolated one-sixteenth carpet
+36	gray-poke-wool-carpet	carpet-ctm-isolated	220	100	226	1	one isolated one-sixteenth carpet
+37	black-poke-wool-carpet	carpet-ctm-isolated	222	100	226	1	one isolated one-sixteenth carpet
+38	red-wool-open-l	ctm-topology	232	100	216	3	open L; southeast diagonal missing
+39	red-wool-full-three-by-three	ctm-topology	239	100	216	9	full 3-by-3
+40	blue-carpet-open-l	carpet-ctm-topology	232	100	226	3	open L; southeast diagonal missing
+41	blue-carpet-full-three-by-three	carpet-ctm-topology	239	100	226	9	full 3-by-3
+42	stock-oak-chair	stock-control	208	100	236	1	outside the 37-ID route and rendered by stock BlueMap
+43	stock-oak-table	stock-control	212	100	236	1	outside the 37-ID route and rendered by stock BlueMap
+44	stock-red-sofa	stock-control	216	100	236	1	outside the 37-ID route and rendered by stock BlueMap
+45	stock-red-cabinetry	stock-control	220	100	236	1	outside the 37-ID route and rendered by stock BlueMap
+46	stock-poke-ball-desk	stock-control	224	100	236	1	outside the 37-ID route and rendered by stock BlueMap
