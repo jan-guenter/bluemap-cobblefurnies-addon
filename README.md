@@ -58,7 +58,11 @@ the [staging gate](docs/STAGING.md).
 
 ## Authoritative review gate
 
-Use Gradle 9.6.1, Java 21, and the exact sibling BlueMap checkout:
+Clone with `--recurse-submodules`, or initialize an existing checkout with
+`git submodule update --init --recursive -- tooling/bluemap-addon-toolkit`.
+The settings preflight rejects an uninitialized, changed, or incorrectly
+pinned toolkit checkout. Then use Gradle 9.6.1, Java 21, and the exact sibling
+BlueMap checkout:
 
 ```bash
 gradle --no-daemon \
