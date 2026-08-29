@@ -45,6 +45,7 @@ Use Gradle 9.6.1. Release gates require both artifact properties and must fail
 closed if either is absent:
 
 ```bash
+git submodule update --init --recursive -- tooling/bluemap-addon-toolkit
 python3 gallery/generate.py --check
 (cd gallery && sha256sum --check SHA256SUMS)
 python3 -m unittest discover -s tools/tests -p 'test_*.py'
