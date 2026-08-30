@@ -11,8 +11,8 @@ Before tagging:
    version and passes CI.
 2. Confirm the exact commit, version, changelog, provenance, four publication
    payloads, and clean worktree. Initialize the pinned toolkit with
-   `git submodule update --init --recursive -- tooling/bluemap-addon-toolkit`;
-   its settings trust preflight must pass without changing the gitlink.
+   `git submodule update --init --recursive -- tooling/bluemap-addon-toolkit modules/bluemap-athena-resource-models`;
+   the settings trust preflight must pass without changing either gitlink.
 3. Complete the disposable staging lifecycle in [STAGING.md](STAGING.md) and
    obtain owner visual acceptance.
 4. Merge to `main` and create annotated tag `v<addon_version>` on that exact

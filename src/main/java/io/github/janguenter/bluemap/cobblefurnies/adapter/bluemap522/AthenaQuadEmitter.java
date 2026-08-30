@@ -21,7 +21,7 @@ import de.bluecolored.bluemap.core.util.math.Color;
 import de.bluecolored.bluemap.core.world.BlockProperties;
 import de.bluecolored.bluemap.core.world.block.BlockNeighborhood;
 import de.bluecolored.bluemap.core.world.block.ExtendedBlock;
-import io.github.janguenter.bluemap.cobblefurnies.model.CubeFace;
+import io.github.janguenter.bluemap.resource.athena.model.CubeFace;
 
 /** Emits deterministic face-local quads with cropped geometry-locked UVs. */
 final class AthenaQuadEmitter {

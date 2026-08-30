@@ -14,6 +14,10 @@ base {
     archivesName = artifact_id
 }
 
+sourceSets {
+    main.java.srcDir 'modules/bluemap-athena-resource-models/src/main/java'
+}
+
 repositories {
     mavenCentral()
     maven {
@@ -103,6 +107,30 @@ tasks.named('sourcesJar', Jar).configure {
 
 def productionJar = tasks.named('jar', Jar).flatMap { it.archiveFile }
 def publishedSourcesJar = tasks.named('sourcesJar', Jar).flatMap { it.archiveFile }
+def sharedAthenaPackage = 'io/github/janguenter/bluemap/resource/athena/model/'
+def sharedAthenaClasses = [
+        "${sharedAthenaPackage}CtmConnections.class",
+        "${sharedAthenaPackage}CtmSelector.class",
+        "${sharedAthenaPackage}CtmTextureRole.class",
+        "${sharedAthenaPackage}CubeFace.class",
+        "${sharedAthenaPackage}CubeFace\$Vec.class"
+].collect { it.toString() }
+def sharedAthenaSources = [
+        "${sharedAthenaPackage}CtmConnections.java",
+        "${sharedAthenaPackage}CtmSelector.java",
+        "${sharedAthenaPackage}CtmTextureRole.java",
+        "${sharedAthenaPackage}CubeFace.java"
+].collect { it.toString() }
+def legacyAthenaClasses = [
+        'io/github/janguenter/bluemap/cobblefurnies/model/CtmConnections.class',
+        'io/github/janguenter/bluemap/cobblefurnies/model/CtmSelector.class',
+        'io/github/janguenter/bluemap/cobblefurnies/model/CtmTextureRole.class',
+        'io/github/janguenter/bluemap/cobblefurnies/model/CubeFace.class',
+        'io/github/janguenter/bluemap/cobblefurnies/model/CubeFace$Vec.class'
+]
+def legacyAthenaSources = legacyAthenaClasses.collect {
+    it.replace('.class', '.java').replace('$Vec.java', '.java')
+}.unique()
 tasks.register('verifyProductionJar') {
     dependsOn tasks.named('jar')
     inputs.file(productionJar)
@@ -125,10 +153,16 @@ tasks.register('verifyProductionJar') {
                     'META-INF/NOTICE-bluemap-cobblefurnies-addon.md',
                     'META-INF/THIRD_PARTY-bluemap-cobblefurnies-addon.md',
                     'META-INF/bluemap-cobblefurnies/upstreams.json'
-            ]
+            ] + sharedAthenaClasses
             def missing = required.findAll { !entries.contains(it) }
-            if (!missing.isEmpty()) {
-                throw new GradleException("Production JAR is missing: ${missing}")
+            def duplicateShared = sharedAthenaClasses.findAll { shared ->
+                entries.count { it == shared } != 1
+            }
+            if (!missing.isEmpty() || !duplicateShared.isEmpty()) {
+                throw new GradleException(
+                        "Production JAR shared boundary mismatch: missing=${missing}, "
+                                + "nonUnique=${duplicateShared}"
+                )
             }
             def addon = new groovy.json.JsonSlurper().parseText(
                     zip.getInputStream(zip.getEntry('bluemap.addon.json')).getText('UTF-8')
@@ -143,6 +177,7 @@ tasks.register('verifyProductionJar') {
             def foreignClasses = entries.findAll {
                 it.endsWith('.class')
                         && !it.startsWith('io/github/janguenter/bluemap/cobblefurnies/')
+                        && !sharedAthenaClasses.contains(it)
             }
             def forbidden = archiveEntries.findAll {
                 it.endsWith('.jar')
@@ -159,6 +194,10 @@ tasks.register('verifyProductionJar') {
                         || it.startsWith('de/maxhenkel/')
                         || it.startsWith('net/minecraft/')
                         || it.startsWith('net/neoforged/')
+                        || legacyAthenaClasses.contains(it)
+                        || (it.startsWith(sharedAthenaPackage)
+                            && it != sharedAthenaPackage
+                            && !sharedAthenaClasses.contains(it))
             }
             if (!foreignClasses.isEmpty() || !forbidden.isEmpty()) {
                 throw new GradleException(
@@ -203,14 +242,21 @@ tasks.register('verifySourcesJar') {
                     'META-INF/NOTICE-bluemap-cobblefurnies-addon.md',
                     'META-INF/THIRD_PARTY-bluemap-cobblefurnies-addon.md',
                     'META-INF/bluemap-cobblefurnies/upstreams.json'
-            ]
+            ] + sharedAthenaSources
             def missing = required.findAll { !entries.contains(it) }
-            if (!missing.isEmpty()) {
-                throw new GradleException("Sources JAR is missing: ${missing}")
+            def duplicateShared = sharedAthenaSources.findAll { shared ->
+                entries.count { it == shared } != 1
+            }
+            if (!missing.isEmpty() || !duplicateShared.isEmpty()) {
+                throw new GradleException(
+                        "Sources JAR shared boundary mismatch: missing=${missing}, "
+                                + "nonUnique=${duplicateShared}"
+                )
             }
             def projectJava = entries.findAll { it.endsWith('.java') }
             def foreignJava = projectJava.findAll {
                 !it.startsWith('io/github/janguenter/bluemap/cobblefurnies/')
+                        && !sharedAthenaSources.contains(it)
             }
             def forbidden = archiveEntries.findAll {
                 it.endsWith('.class')
@@ -225,6 +271,10 @@ tasks.register('verifySourcesJar') {
                         || it.startsWith('de/maxhenkel/')
                         || it.startsWith('net/minecraft/')
                         || it.startsWith('net/neoforged/')
+                        || legacyAthenaSources.contains(it)
+                        || (it.startsWith(sharedAthenaPackage)
+                            && it != sharedAthenaPackage
+                            && !sharedAthenaSources.contains(it))
             }
             if (projectJava.isEmpty() || !foreignJava.isEmpty() || !forbidden.isEmpty()) {
                 throw new GradleException(

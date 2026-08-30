@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import io.github.janguenter.bluemap.cobblefurnies.model.CubeFace;
 import de.bluecolored.bluemap.core.util.math.Color;
+import io.github.janguenter.bluemap.resource.athena.model.CubeFace;
 import org.junit.jupiter.api.Test;
 
 class AthenaQuadEmitterTest {

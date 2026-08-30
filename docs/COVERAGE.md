@@ -23,10 +23,11 @@ five stock furniture controls. Red wool and blue carpet each have an open-L and
 a full 3-by-3 witness. The occupied AABB is
 `208..240, 100..101, 208..236`.
 
-The enabled staging preview candidate was 107,618 bytes with SHA-256
+The owner-accepted `0.1.0-alpha.1` staging preview was 107,618 bytes with SHA-256
 `4e4bf32380fbe19d4a7a10240f8176e24320481c71b06551bd34912dc06e66e8`.
-The agent visual sanity check passed; owner visual acceptance is pending. Its
-bounded review covers the exact gallery, not every possible neighboring
+The agent visual sanity check and owner visual acceptance passed. The
+`0.1.0-alpha.2` candidate changes source ownership only and inherits that
+bounded acceptance; the review does not cover every possible neighboring
 arrangement or lighting condition.
 
 All other furniture, all statue upper halves, animation, live block-entity

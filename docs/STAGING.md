@@ -29,17 +29,17 @@ Run one bounded lifecycle:
 
 ## Current preview evidence
 
-The enabled 107,618-byte preview candidate has SHA-256
+The owner-accepted `0.1.0-alpha.1` preview was 107,618 bytes with SHA-256
 `4e4bf32380fbe19d4a7a10240f8176e24320481c71b06551bd34912dc06e66e8`.
 It ran as the sole active add-on through cold restart 13 to 14, one bounded
 lifecycle/update, and verification of all 71 states, five lower block entities,
 and five upper non-block-entities. The required lightweight agent BlueMap
 sanity check passed against the fresh 1600-by-1100 screenshot (99,313 bytes,
 SHA-256 `84bb13ef0889563b8fd281bfbf5164ec7f8724731e8f969dc453f21ec110e5e6`).
-Owner visual acceptance is still pending and release remains blocked until it
-is explicit.
-Later release-readiness documentation/test/workflow changes produce a new
-payload that still requires an independent artifact audit.
+Owner visual acceptance passed for that exact gallery. The
+`0.1.0-alpha.2` candidate changes only source ownership and inherits the
+accepted visual scope; its exact four release payloads and combined runtime
+cohort still require their independent gates.
 
 BlueMap host lighting is expected to differ from Minecraft client
 `entityCutoutNoCull` lighting. Staging acceptance targets geometry, UVs,
