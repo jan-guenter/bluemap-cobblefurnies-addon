@@ -6,12 +6,13 @@ This is an unofficial community add-on. It is not affiliated with or endorsed
 by BlueMap, CobbleFurnies, Athena, CurseForge, Modrinth, NeoForged, Mojang,
 Microsoft, or the All the Mons project.
 
-The BlueMap add-on activation/profile/adapter framework and Athena
-connected-texture selection/emission implementation adapt first-party MIT code
-from Jan Guenter's BlueMap Chipped Add-on at commit
-`c474a82b6bfd1b4173d119cb1e053a5458167e4b`. The CobbleFurnies-specific
+Four pure Athena connected-texture model classes are source-bundled from Jan
+Guenter's MIT `bluemap-athena-resource-models` `0.1.0-alpha.1` at commit
+`4a503a63f7f10b7c414c6c1228207a5ba00bfd54`. That module records their exact
+BlueMap Chipped Add-on origin. The activation/profile/adapter framework and
+emitter retain their separately recorded Chipped origin; CobbleFurnies-specific
 profile data and orchestration, bounded BBS interpreter/statue path, gallery,
-and release tests were authored for this repository.
+and release tests remain authored here.
 
 No CobbleFurnies or Athena binary, class, source, model, texture, BBS resource,
 capture, or derived mesh is included. Names, identifiers, resource paths,

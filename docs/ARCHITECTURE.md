@@ -33,12 +33,13 @@ Every other CobbleFurnies block also remains stock.
 
 ## Connected textures
 
-The shared first-party framework and wool renderer sample eight exact-state neighbors in each face plane,
+The wool renderer samples eight exact-state neighbors in each face plane,
 selects the Athena CTM role for four quadrants, and suppresses faces against
-the same block ID. Carpet CTM uses the installed one-sixteenth-high shape, four
-side faces, and connected top/bottom surfaces. This logic structurally adapts
-the owner's first-party MIT BlueMap Chipped Add-on. CobbleFurnies-specific
-profile/data/orchestration is project-authored around that reused framework.
+the same block ID. Its four pure connection/face primitives are compiled from
+the exact pinned `bluemap-athena-resource-models` source module. Carpet CTM
+uses the installed one-sixteenth-high shape, four side faces, and connected
+top/bottom surfaces. Emission, lighting, resource admission, profile data, and
+orchestration remain project-owned and local.
 
 ## Static statues
 

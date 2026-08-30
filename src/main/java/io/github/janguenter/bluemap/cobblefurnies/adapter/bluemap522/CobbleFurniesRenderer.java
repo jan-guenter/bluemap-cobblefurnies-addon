@@ -15,14 +15,14 @@ import de.bluecolored.bluemap.core.world.BlockState;
 import de.bluecolored.bluemap.core.world.block.BlockNeighborhood;
 import io.github.janguenter.bluemap.cobblefurnies.activation.CompiledProfile;
 import io.github.janguenter.bluemap.cobblefurnies.activation.CobbleFurniesRuntime;
-import io.github.janguenter.bluemap.cobblefurnies.model.CtmConnections;
-import io.github.janguenter.bluemap.cobblefurnies.model.CtmTextureRole;
-import io.github.janguenter.bluemap.cobblefurnies.model.CubeFace;
 import io.github.janguenter.bluemap.cobblefurnies.model.StatueFacing;
 import io.github.janguenter.bluemap.cobblefurnies.model.StatueModel;
 import io.github.janguenter.bluemap.cobblefurnies.profile.CobbleFurnies12Athena406Profile;
 import io.github.janguenter.bluemap.cobblefurnies.profile.CobbleFurniesDefinition;
 import io.github.janguenter.bluemap.cobblefurnies.profile.LoaderFamily;
+import io.github.janguenter.bluemap.resource.athena.model.CtmConnections;
+import io.github.janguenter.bluemap.resource.athena.model.CtmTextureRole;
+import io.github.janguenter.bluemap.resource.athena.model.CubeFace;
 
 import java.util.function.Consumer;
 

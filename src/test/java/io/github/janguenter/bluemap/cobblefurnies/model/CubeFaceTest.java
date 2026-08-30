@@ -3,6 +3,7 @@ package io.github.janguenter.bluemap.cobblefurnies.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import io.github.janguenter.bluemap.resource.athena.model.CubeFace;
 import org.junit.jupiter.api.Test;
 
 class CubeFaceTest {

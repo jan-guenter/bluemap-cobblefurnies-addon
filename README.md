@@ -5,7 +5,8 @@ five static CobbleFurnies statues installed by All the Mons 1.2.0.
 
 ## Status and compatibility
 
-Version `0.1.0-alpha.1` targets one exact tuple:
+Version `0.1.0-alpha.2` is the source-consolidation candidate for the same
+exact tuple:
 
 - CobbleFurnies `1.2`, `CobbleFurnies-neoforge-1.2.jar`, 2,343,464 bytes,
   SHA-1 `451c445ff636c1e5821f13e3a3f40ee16ecb3342`, SHA-256
@@ -21,12 +22,11 @@ The route activates only when the installed CobbleFurnies and Athena JARs
 match those exact bytes and all 132 required resources retain their locked
 identities. Any mismatch leaves all blocks on BlueMap's stock path.
 
-The reproducible enabled staging preview candidate is 107,618 bytes with SHA-256
-`4e4bf32380fbe19d4a7a10240f8176e24320481c71b06551bd34912dc06e66e8`.
-The agent's required lightweight BlueMap visual sanity check passed. Owner
-visual acceptance is pending; release remains blocked until it is explicit.
-That identity records the enabled preview candidate, not the later
-release-readiness rebuild.
+The owner accepted and released `0.1.0-alpha.1`. The `0.1.0-alpha.2` candidate
+changes source ownership only: the four exact Athena model primitives now come
+from the released, commit-pinned `bluemap-athena-resource-models`
+`0.1.0-alpha.1` source module. Emitters, profiles, resource admission, routing,
+fallback, and gallery behavior remain local and unchanged.
 
 ## Visual scope
 
@@ -58,11 +58,16 @@ the [staging gate](docs/STAGING.md).
 
 ## Authoritative review gate
 
-Clone with `--recurse-submodules`, or initialize an existing checkout with
-`git submodule update --init --recursive -- tooling/bluemap-addon-toolkit`.
-The settings preflight rejects an uninitialized, changed, or incorrectly
-pinned toolkit checkout. Then use Gradle 9.6.1, Java 21, and the exact sibling
-BlueMap checkout:
+Clone with `--recurse-submodules`, or initialize an existing checkout with:
+
+```bash
+git submodule update --init --recursive -- \
+  tooling/bluemap-addon-toolkit modules/bluemap-athena-resource-models
+```
+
+The settings preflight rejects an uninitialized, changed, dirty, incorrectly
+pinned, or source-tree-mismatched module checkout. Then use Gradle 9.6.1,
+Java 21, and the exact sibling BlueMap checkout:
 
 ```bash
 gradle --no-daemon \
@@ -94,10 +99,11 @@ data.
 
 ## License and provenance
 
-The add-on is released under the [MIT License](LICENSE). Its BlueMap add-on
-activation/profile/adapter framework and Athena CTM implementation reuse
-first-party MIT code from the owner's BlueMap Chipped add-on. The
-CobbleFurnies-specific profile/data/orchestration and bounded BBS/statue path
-were authored here. No exact upstream source correlation is asserted. See
+The add-on is released under the [MIT License](LICENSE). Four exact Athena CTM
+model primitives are source-bundled from the owner's released MIT
+`bluemap-athena-resource-models` module. The BlueMap add-on framework and
+emitter retain their recorded Chipped origin; CobbleFurnies-specific
+profile/data/orchestration and the bounded BBS/statue path remain local. No
+exact third-party upstream source correlation is asserted. See
 [THIRD_PARTY.md](THIRD_PARTY.md),
 [NOTICE.md](NOTICE.md), and [docs/PROVENANCE.md](docs/PROVENANCE.md).

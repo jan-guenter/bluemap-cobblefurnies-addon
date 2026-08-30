@@ -1,3 +1,6 @@
 [submodule "tooling/bluemap-addon-toolkit"]
 	path = tooling/bluemap-addon-toolkit
 	url = https://github.com/jan-guenter/bluemap-addon-toolkit.git
+[submodule "modules/bluemap-athena-resource-models"]
+	path = modules/bluemap-athena-resource-models
+	url = https://github.com/jan-guenter/bluemap-athena-resource-models.git

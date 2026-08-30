@@ -3,8 +3,13 @@
 pluginManagement {
     def toolkitPath = 'tooling/bluemap-addon-toolkit'
     def expectedToolkitCommit = '6cd34a8368cc4ee8628fbe830a90ec5b14960629'
+    def athenaModelsPath = 'modules/bluemap-athena-resource-models'
+    def expectedAthenaModelsCommit = '4a503a63f7f10b7c414c6c1228207a5ba00bfd54'
+    def expectedAthenaModelsSourceTree = '882689c2f9a0875547f4e30aefd68659103d5046'
     def consumerRoot = settings.settingsDir
     def toolkit = new File(consumerRoot, toolkitPath)
+    def athenaModels = new File(consumerRoot, athenaModelsPath)
+    def athenaModelsSource = new File(athenaModels, 'src/main/java')
 
     if (!(expectedToolkitCommit ==~ /[0-9a-f]{40}/)
             || !new File(consumerRoot, '.git').exists()
@@ -15,8 +20,18 @@ pluginManagement {
                         + "Run: git submodule update --init --recursive -- ${toolkitPath}"
         )
     }
+    if (!(expectedAthenaModelsCommit ==~ /[0-9a-f]{40}/)
+            || !(expectedAthenaModelsSourceTree ==~ /[0-9a-f]{40}/)
+            || !athenaModels.isDirectory()
+            || !new File(athenaModels, '.git').exists()
+            || !athenaModelsSource.isDirectory()) {
+        throw new GradleException(
+                'Athena model trust preflight is not configured or initialized. '
+                        + "Run: git submodule update --init --recursive -- ${athenaModelsPath}"
+        )
+    }
 
-    def toolkitGitOutput = {
+    def trustedGitOutput = {
         File repository, List<String> arguments, String operation ->
         def execution = settings.providers.exec {
             commandLine(['git', '-C', repository.absolutePath] + arguments)
@@ -35,15 +50,15 @@ pluginManagement {
         output
     }
 
-    if (!toolkitGitOutput(consumerRoot, ['rev-parse', '--show-prefix'],
+    if (!trustedGitOutput(consumerRoot, ['rev-parse', '--show-prefix'],
             'verify the consumer root').isEmpty()) {
         throw new GradleException('settings.gradle must be at the Git worktree root')
     }
 
-    def tree = toolkitGitOutput(consumerRoot,
+    def tree = trustedGitOutput(consumerRoot,
             ['ls-tree', 'HEAD', '--', toolkitPath],
             'read the committed toolkit gitlink').tokenize(' \t')
-    def index = toolkitGitOutput(consumerRoot,
+    def index = trustedGitOutput(consumerRoot,
             ['ls-files', '--stage', '--', toolkitPath],
             'read the indexed toolkit gitlink').tokenize(' \t')
     if (tree.size() != 4 || tree[0] != '160000' || tree[1] != 'commit'
@@ -54,13 +69,46 @@ pluginManagement {
         throw new GradleException('Committed/indexed toolkit gitlink does not match its pin')
     }
 
-    def toolkitHead = toolkitGitOutput(toolkit,
+    def toolkitHead = trustedGitOutput(toolkit,
             ['rev-parse', '--verify', 'HEAD^{commit}'], 'read toolkit HEAD')
-    def toolkitStatus = toolkitGitOutput(toolkit,
+    def toolkitStatus = trustedGitOutput(toolkit,
             ['status', '--porcelain=v1', '--untracked-files=all',
              '--ignore-submodules=none'], 'verify the toolkit worktree')
     if (toolkitHead != expectedToolkitCommit || !toolkitStatus.isEmpty()) {
         throw new GradleException('Toolkit HEAD differs from the gitlink or is dirty')
+    }
+
+    def athenaModelsTree = trustedGitOutput(consumerRoot,
+            ['ls-tree', 'HEAD', '--', athenaModelsPath],
+            'read the committed Athena model gitlink').tokenize(' \t')
+    def athenaModelsIndex = trustedGitOutput(consumerRoot,
+            ['ls-files', '--stage', '--', athenaModelsPath],
+            'read the indexed Athena model gitlink').tokenize(' \t')
+    if (athenaModelsTree.size() != 4 || athenaModelsTree[0] != '160000'
+            || athenaModelsTree[1] != 'commit'
+            || athenaModelsTree[2] != expectedAthenaModelsCommit
+            || athenaModelsTree[3] != athenaModelsPath
+            || athenaModelsIndex.size() != 4 || athenaModelsIndex[0] != '160000'
+            || athenaModelsIndex[1] != expectedAthenaModelsCommit
+            || athenaModelsIndex[2] != '0' || athenaModelsIndex[3] != athenaModelsPath) {
+        throw new GradleException(
+                'Committed/indexed Athena model gitlink does not match its pin'
+        )
+    }
+
+    def athenaModelsHead = trustedGitOutput(athenaModels,
+            ['rev-parse', '--verify', 'HEAD^{commit}'], 'read Athena model HEAD')
+    def athenaModelsTreeHash = trustedGitOutput(athenaModels,
+            ['rev-parse', 'HEAD:src/main/java'], 'read Athena model source tree')
+    def athenaModelsStatus = trustedGitOutput(athenaModels,
+            ['status', '--porcelain=v1', '--untracked-files=all',
+             '--ignore-submodules=none'], 'verify the Athena model worktree')
+    if (athenaModelsHead != expectedAthenaModelsCommit
+            || athenaModelsTreeHash != expectedAthenaModelsSourceTree
+            || !athenaModelsStatus.isEmpty()) {
+        throw new GradleException(
+                'Athena model HEAD/source tree differs from the pin or is dirty'
+        )
     }
 
     def gradleBuild = new File(toolkit, 'gradle')

@@ -27,10 +27,14 @@ The public CobbleFurnies repository, if consulted, is reference-only. This
 project makes no reproducible-build claim for either input.
 
 The BlueMap add-on activation/profile/adapter framework and Athena CTM
-selection/emission implementation are adapted from the owner's first-party MIT
-BlueMap Chipped Add-on at commit
-`c474a82b6bfd1b4173d119cb1e053a5458167e4b`. The CobbleFurnies-specific
-profile data/orchestration and bounded BBS interpreter/statue path were
-authored for this repository. Neither published JAR contains CobbleFurnies or
-Athena source, classes, models, textures, BBS files, captures, or derived
-meshes.
+emission implementation are adapted from the owner's first-party MIT BlueMap
+Chipped Add-on at commit `c474a82b6bfd1b4173d119cb1e053a5458167e4b`.
+The four pure Athena connection/face primitives are source-bundled from
+`bluemap-athena-resource-models` `0.1.0-alpha.1`, commit
+`4a503a63f7f10b7c414c6c1228207a5ba00bfd54`, source tree
+`882689c2f9a0875547f4e30aefd68659103d5046`. That released MIT module records
+their exact first-party origin and exhaustive parity evidence. The module JAR
+is not installed or nested. CobbleFurnies-specific profile data/orchestration
+and the bounded BBS interpreter/statue path remain local. Neither published
+JAR contains third-party CobbleFurnies or Athena source, classes, models,
+textures, BBS files, captures, or derived meshes.
