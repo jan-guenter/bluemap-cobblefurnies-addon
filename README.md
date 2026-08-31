@@ -8,6 +8,9 @@ five static CobbleFurnies statues installed by All the Mons 1.2.0.
 Version `0.1.0-alpha.3` is an unpublished BlueMap 5.23 adapter migration
 candidate for the same exact tuple:
 
+The candidate production JAR is 112,216 bytes with SHA-256
+`93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228`.
+
 - CobbleFurnies `1.2`, `CobbleFurnies-neoforge-1.2.jar`, 2,343,464 bytes,
   SHA-1 `451c445ff636c1e5821f13e3a3f40ee16ecb3342`, SHA-256
   `82894965d01bfb00fb6109ac275622a157d415ef0957d41fd6478b6d64ce34f8`;

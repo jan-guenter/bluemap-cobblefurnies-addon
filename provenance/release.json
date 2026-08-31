@@ -1,57 +1,87 @@
 {
   "schema_version": 1,
-  "status": "owner-accepted-release-candidate",
-  "version": "0.1.0-alpha.2",
-  "release_date": "2026-08-30",
+  "status": "unpublished-migration-candidate",
+  "published": false,
+  "version": "0.1.0-alpha.3",
+  "release_date": "2026-08-31",
   "repository": "https://github.com/jan-guenter/bluemap-cobblefurnies-addon",
-  "tag": "v0.1.0-alpha.2",
-  "maven_coordinate": "io.github.jan-guenter:bluemap-cobblefurnies-addon:0.1.0-alpha.2",
-  "inherited_visual_acceptance": {
-    "baseline_version": "0.1.0-alpha.1",
-    "baseline_release_commit": "eea5407dbbd162cbe4dd8fc5bc247f6617cf5d98",
-    "baseline_release_tree": "8c0261af9e7bbd760524e35e508d25210748e611",
-    "baseline_production_jar_size": 108237,
-    "baseline_production_jar_sha256": "2c9df027e4cd1b4f56856dcb05a65499b6ed1df3f8592e9d662ad59e477564a3",
-    "visual_acceptance": true,
-    "scope": "The accepted CobbleFurnies renderer and gallery behavior are unchanged; alpha.2 replaces four local pure-model sources with the package-neutral shared Athena source module."
-  },
-  "final_release_artifacts": {
+  "tag": "v0.1.0-alpha.3",
+  "maven_coordinate": "io.github.jan-guenter:bluemap-cobblefurnies-addon:0.1.0-alpha.3",
+  "candidate_artifacts": {
     "production_jar": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2.jar",
-      "size": 109187,
-      "sha256": "71bf381f34e5fcb93aed8737198afba4909d8e07a6d8da4183ec5d6a618db52e"
+      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.jar",
+      "size": 112216,
+      "sha256": "93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228"
     },
     "sources_jar": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2-sources.jar",
-      "size": 55106,
-      "sha256": "7726d20c435a7352143747683375871efeadd53abc291748dbf7c70086bb2278"
+      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3-sources.jar",
+      "size": 57730,
+      "sha256": "4fecea9c8c29bbd96a6b634f44c15dad087d0beac24d46dd859707b4d75c9556"
     },
     "pom": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2.pom",
+      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.pom",
       "size": 1407,
-      "sha256": "89ec5f41f98ca7425fa4cc116f9c7d92207c9fc74aafd298a42d9dfdcf04b183"
+      "sha256": "a32a194a0bc262fff43d87d0831975875260239e8548e14d0a6a901d1e8cab12"
     },
     "gradle_module": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2.module.json",
+      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.module.json",
       "size": 2861,
-      "sha256": "3adebf6abb8bb26ce9674cfd68133fb1b95a5540bfd70063eaee88ac821ce8d1"
+      "sha256": "64165e3fe78209689f6af01d2745ac4518e068d23b778dd500bf84c52b8a71ba"
     }
   },
-  "athena_model_migration": {
-    "module_repository": "https://github.com/jan-guenter/bluemap-athena-resource-models",
-    "module_version": "0.1.0-alpha.1",
-    "module_tag": "v0.1.0-alpha.1",
-    "module_commit": "4a503a63f7f10b7c414c6c1228207a5ba00bfd54",
-    "module_source_tree": "882689c2f9a0875547f4e30aefd68659103d5046",
-    "removed_local_model_sources": 4,
-    "renderer_or_gallery_behavior_change": false
+  "baseline_release": {
+    "version": "0.1.0-alpha.2",
+    "tag": "v0.1.0-alpha.2",
+    "production_jar_size": 109187,
+    "production_jar_sha256": "71bf381f34e5fcb93aed8737198afba4909d8e07a6d8da4183ec5d6a618db52e",
+    "owner_visual_acceptance": true
+  },
+  "adapter_api_migration": {
+    "repository": "https://github.com/jan-guenter/bluemap-addon-adapter-api",
+    "version": "0.1.0-alpha.2",
+    "tag": "v0.1.0-alpha.2",
+    "release_target_commit": "e81f08bc4bfbf02d810ec8949a019130e2e61634",
+    "source_tree": "2f974c9bb2ba13888d69682f86f30f58922d30eb",
+    "target_bluemap_version": "5.22-feature.backport-5.23-stateless-java-web-server-46",
+    "bluemap_commit": "7e07f4e74ec1e92a6ead9aa1e66054af3e133aac",
+    "bluemap_api_commit": "285c9a60eff3ac2b0cab308ce1058d1565be0971",
+    "tested_source_commit": "e8b79317533edeb8f171e0f370d3831d118f0421",
+    "tested_source_tree": "bd27d3a1585454197f3ca92427ac1cf859f5e6c8",
+    "compiled_source_count": 4,
+    "standalone_module_jar_bundled": false,
+    "standalone_module_jar_nested": false,
+    "standalone_module_jar_installed": false,
+    "local_adapter_package": "io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap523",
+    "displaced_local_helpers": [
+      "AdapterCompatibility",
+      "inline registry admission methods",
+      "CobbleFurniesResourceExtensionType"
+    ]
+  },
+  "athena_model_module": {
+    "repository": "https://github.com/jan-guenter/bluemap-athena-resource-models",
+    "version": "0.1.0-alpha.1",
+    "tag": "v0.1.0-alpha.1",
+    "release_target_commit": "4a503a63f7f10b7c414c6c1228207a5ba00bfd54",
+    "source_tree": "882689c2f9a0875547f4e30aefd68659103d5046",
+    "compiled_source_count": 4,
+    "standalone_module_jar_bundled": false,
+    "standalone_module_jar_nested": false,
+    "standalone_module_jar_installed": false
+  },
+  "preserved_contract": {
+    "routed_block_count": 37,
+    "gallery_sources_changed": false,
+    "runtime_profile_and_renderer_behavior_changed": false
   },
   "verification": {
-    "production_jar_exact_byte_gate": true,
-    "sources_jar_exact_byte_gate": true,
-    "publication_metadata_exact_byte_gate": true,
     "exact_input_gate": true,
-    "reproducibility_gate": true,
-    "hostile_gitlink_trust_probes": true
+    "production_archive_boundary_gate": true,
+    "sources_archive_boundary_gate": true,
+    "exact_feature_backport_runtime_identity_gate": true,
+    "gradle_9_6_1_clean_build": true,
+    "java_tests_passed": 28,
+    "python_tests_passed": 13,
+    "checkstyle": true
   }
 }

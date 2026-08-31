@@ -12,42 +12,44 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class ReleaseContractTest(unittest.TestCase):
-    def test_alpha2_candidate_provenance_matches_reproducible_payloads(self) -> None:
+    def test_alpha3_candidate_provenance_matches_reproducible_payloads(self) -> None:
         release = json.loads((ROOT / "provenance/release.json").read_text())
-        self.assertEqual("owner-accepted-release-candidate", release["status"])
-        self.assertEqual("0.1.0-alpha.2", release["version"])
-        self.assertEqual("v0.1.0-alpha.2", release["tag"])
+        self.assertEqual("unpublished-migration-candidate", release["status"])
+        self.assertEqual("0.1.0-alpha.3", release["version"])
+        self.assertEqual("v0.1.0-alpha.3", release["tag"])
         self.assertEqual(
             {
                 "production_jar": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2.jar",
-                    "size": 109_187,
-                    "sha256": "71bf381f34e5fcb93aed8737198afba4909d8e07a6d8da4183ec5d6a618db52e",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.jar",
+                    "size": 112_216,
+                    "sha256": "93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228",
                 },
                 "sources_jar": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2-sources.jar",
-                    "size": 55_106,
-                    "sha256": "7726d20c435a7352143747683375871efeadd53abc291748dbf7c70086bb2278",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3-sources.jar",
+                    "size": 57_730,
+                    "sha256": "4fecea9c8c29bbd96a6b634f44c15dad087d0beac24d46dd859707b4d75c9556",
                 },
                 "pom": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2.pom",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.pom",
                     "size": 1_407,
-                    "sha256": "89ec5f41f98ca7425fa4cc116f9c7d92207c9fc74aafd298a42d9dfdcf04b183",
+                    "sha256": "a32a194a0bc262fff43d87d0831975875260239e8548e14d0a6a901d1e8cab12",
                 },
                 "gradle_module": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.2.module.json",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.module.json",
                     "size": 2_861,
-                    "sha256": "3adebf6abb8bb26ce9674cfd68133fb1b95a5540bfd70063eaee88ac821ce8d1",
+                    "sha256": "64165e3fe78209689f6af01d2745ac4518e068d23b778dd500bf84c52b8a71ba",
                 },
             },
-            release["final_release_artifacts"],
+            release["candidate_artifacts"],
         )
-        migration = release["athena_model_migration"]
+        migration = release["athena_model_module"]
         self.assertEqual(
             "4a503a63f7f10b7c414c6c1228207a5ba00bfd54",
-            migration["module_commit"],
+            migration["release_target_commit"],
         )
-        self.assertFalse(migration["renderer_or_gallery_behavior_change"])
+        self.assertFalse(release["preserved_contract"][
+            "runtime_profile_and_renderer_behavior_changed"
+        ])
 
     def test_provenance_locks_exact_unbundled_artifacts_without_source_claim(self) -> None:
         provenance = json.loads((ROOT / "provenance/upstreams.json").read_text())
@@ -97,6 +99,11 @@ class ReleaseContractTest(unittest.TestCase):
         self.assertEqual("exact gitlink-pinned sources compiled into the consumer",
                          module["integration"])
         self.assertFalse(module["artifact_bundled"])
+        adapter = provenance["shared_adapter_api_module"]
+        self.assertEqual("e81f08bc4bfbf02d810ec8949a019130e2e61634",
+                         adapter["commit"])
+        self.assertEqual("2f974c9bb2ba13888d69682f86f30f58922d30eb",
+                         adapter["source_tree"])
 
     def test_ci_requires_exact_inputs_and_never_mentions_inherited_chipped_input(self) -> None:
         workflow = (ROOT / ".github/workflows/ci.yml").read_text()
