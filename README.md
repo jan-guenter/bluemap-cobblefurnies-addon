@@ -5,8 +5,8 @@ five static CobbleFurnies statues installed by All the Mons 1.2.0.
 
 ## Status and compatibility
 
-Version `0.1.0-alpha.3` is an unpublished BlueMap 5.23 adapter migration
-candidate for the same exact tuple:
+Version `0.1.0-alpha.3` is the owner-accepted BlueMap 5.23 adapter migration
+release candidate for the same exact tuple:
 
 The candidate production JAR is 112,216 bytes with SHA-256
 `93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228`.

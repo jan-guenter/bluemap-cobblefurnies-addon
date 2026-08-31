@@ -12,9 +12,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class ReleaseContractTest(unittest.TestCase):
-    def test_alpha3_candidate_provenance_matches_reproducible_payloads(self) -> None:
+    def test_alpha3_release_provenance_matches_reproducible_payloads(self) -> None:
         release = json.loads((ROOT / "provenance/release.json").read_text())
-        self.assertEqual("unpublished-migration-candidate", release["status"])
+        self.assertEqual("owner-accepted-release-candidate", release["status"])
         self.assertEqual("0.1.0-alpha.3", release["version"])
         self.assertEqual("v0.1.0-alpha.3", release["tag"])
         self.assertEqual(
@@ -42,6 +42,8 @@ class ReleaseContractTest(unittest.TestCase):
             },
             release["candidate_artifacts"],
         )
+        self.assertEqual(release["candidate_artifacts"],
+                         release["final_release_artifacts"])
         migration = release["athena_model_module"]
         self.assertEqual(
             "4a503a63f7f10b7c414c6c1228207a5ba00bfd54",
