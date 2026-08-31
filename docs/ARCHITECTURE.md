@@ -6,7 +6,7 @@ bootstrap, client renderer, packet, world state, or required configuration.
 ```text
 BlueMap add-on entrypoint
         |
-exact BlueMap 5.22 adapter
+exact BlueMap 5.23 feature-backport adapter
         |
 dual exact-JAR + 132-resource gate
         |

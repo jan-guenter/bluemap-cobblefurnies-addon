@@ -6,7 +6,7 @@
  * c474a82b6bfd1b4173d119cb1e053a5458167e4b. Third-party models and textures
  * remain operator-installed and are referenced only by resource key.
  */
-package io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap522;
+package io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap523;
 
 import de.bluecolored.bluemap.core.map.TextureGallery;
 import de.bluecolored.bluemap.core.map.hires.RenderSettings;

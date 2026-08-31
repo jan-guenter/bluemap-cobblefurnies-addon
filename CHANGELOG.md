@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.3 - 2026-08-31
+
+- Target only BlueMap feature-backport commit
+  `7e07f4e74ec1e92a6ead9aa1e66054af3e133aac` and API commit
+  `285c9a60eff3ac2b0cab308ce1058d1565be0971`.
+- Move the adapter boundary from `bluemap522` to `bluemap523`, compile the
+  exact Adapter API source pin, and remove duplicate local adapter helpers.
+- Preserve the released alpha.2 Athena module pin and all accepted connected
+  wool, carpet, and statue rendering behavior.
+
 ## 0.1.0-alpha.2 - 2026-08-30
 
 - Source-bundle the released `bluemap-athena-resource-models`

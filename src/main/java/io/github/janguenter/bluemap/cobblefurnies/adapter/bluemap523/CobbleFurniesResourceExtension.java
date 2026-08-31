@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT */
-package io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap522;
+package io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap523;
 
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePack;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePackExtension;
@@ -155,6 +155,6 @@ final class CobbleFurniesResourceExtension implements ResourcePackExtension {
             return false;
         }
         Variant variant = set.getVariants()[0];
-        return BlueMap522Adapter.isExpectedDispatch(variant);
+        return BlueMap523Adapter.isExpectedDispatch(variant);
     }
 }

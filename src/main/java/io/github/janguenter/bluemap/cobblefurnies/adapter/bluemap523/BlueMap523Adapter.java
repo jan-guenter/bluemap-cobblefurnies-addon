@@ -1,39 +1,44 @@
 /*
  * SPDX-License-Identifier: MIT
  */
-package io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap522;
+package io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap523;
 
 import de.bluecolored.bluemap.core.map.hires.block.BlockRendererType;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.ResourcePack;
 import de.bluecolored.bluemap.core.resources.pack.resourcepack.blockstate.Variant;
-import de.bluecolored.bluemap.core.util.Keyed;
-import de.bluecolored.bluemap.core.util.Registry;
+import de.bluecolored.bluemap.core.util.Key;
+import io.github.janguenter.bluemap.addon.adapter.api.bluemap523.RegistryGuard;
+import io.github.janguenter.bluemap.addon.adapter.api.bluemap523.ResourceExtensionType;
 import io.github.janguenter.bluemap.cobblefurnies.activation.CobbleFurniesRuntime;
 
-/** BlueMap 5.22 internal ABI boundary. */
-public final class BlueMap522Adapter {
+/** Exact BlueMap 5.23 feature-backport internal ABI boundary. */
+public final class BlueMap523Adapter {
 
     private static final CobbleFurniesRuntime RUNTIME = CobbleFurniesRuntime.INSTANCE;
-    private static final de.bluecolored.bluemap.core.util.Key RENDERER_KEY =
-            de.bluecolored.bluemap.core.util.Key.parse("bluemap_cobblefurnies:exact_shape");
+    private static final Key RENDERER_KEY =
+            Key.parse("bluemap_cobblefurnies:exact_shape");
+    static final Key EXTENSION_KEY = Key.parse("bluemap_cobblefurnies:exact_profile");
     private static final BlockRendererType RENDERER = new BlockRendererType.Impl(
             RENDERER_KEY,
             (pack, gallery, settings) -> new CobbleFurniesRenderer(pack, gallery, settings, RUNTIME)
     );
     private static final ResourcePack.Extension<CobbleFurniesResourceExtension> EXTENSION =
-            new CobbleFurniesResourceExtensionType(RUNTIME);
+            new ResourceExtensionType<>(
+                    EXTENSION_KEY,
+                    pack -> new CobbleFurniesResourceExtension(pack, RUNTIME)
+            );
 
-    private BlueMap522Adapter() {
+    private BlueMap523Adapter() {
     }
 
     public static synchronized boolean install() {
-        if (!canRegister(BlockRendererType.REGISTRY, RENDERER)
-                || !canRegister(ResourcePack.Extension.REGISTRY, EXTENSION)) {
+        if (!RegistryGuard.canRegister(BlockRendererType.REGISTRY, RENDERER)
+                || !RegistryGuard.canRegister(ResourcePack.Extension.REGISTRY, EXTENSION)) {
             RUNTIME.disable("registry-collision");
             return false;
         }
-        if (!register(BlockRendererType.REGISTRY, RENDERER)
-                || !register(ResourcePack.Extension.REGISTRY, EXTENSION)) {
+        if (!RegistryGuard.register(BlockRendererType.REGISTRY, RENDERER)
+                || !RegistryGuard.register(ResourcePack.Extension.REGISTRY, EXTENSION)) {
             RUNTIME.disable("registry-collision");
             return false;
         }
@@ -49,17 +54,7 @@ public final class BlueMap522Adapter {
                 && Double.compare(variant.getWeight(), 1D) == 0;
     }
 
-    private static <T extends Keyed> boolean canRegister(Registry<T> registry, T candidate) {
-        T existing = registry.get(candidate.getKey());
-        return existing == null || existing == candidate;
-    }
-
-    private static <T extends Keyed> boolean register(Registry<T> registry, T candidate) {
-        T existing = registry.get(candidate.getKey());
-        if (existing == null) {
-            registry.register(candidate);
-            existing = registry.get(candidate.getKey());
-        }
-        return existing == candidate;
+    static ResourcePack.Extension<CobbleFurniesResourceExtension> extensionType() {
+        return EXTENSION;
     }
 }
