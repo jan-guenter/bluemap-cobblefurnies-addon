@@ -1,12 +1,15 @@
 # BlueMap CobbleFurnies Add-on
 
-An exact-profile BlueMap 5.22 add-on for the Poké Wool connected textures and
+An exact-profile BlueMap 5.23 feature-backport add-on for the Poké Wool connected textures and
 five static CobbleFurnies statues installed by All the Mons 1.2.0.
 
 ## Status and compatibility
 
-Version `0.1.0-alpha.2` is the source-consolidation candidate for the same
-exact tuple:
+Version `0.1.0-alpha.3` is the owner-accepted BlueMap 5.23 adapter migration
+release candidate for the same exact tuple:
+
+The candidate production JAR is 112,216 bytes with SHA-256
+`93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228`.
 
 - CobbleFurnies `1.2`, `CobbleFurnies-neoforge-1.2.jar`, 2,343,464 bytes,
   SHA-1 `451c445ff636c1e5821f13e3a3f40ee16ecb3342`, SHA-256
@@ -15,18 +18,20 @@ exact tuple:
   SHA-1 `4bcbdf388bd5e387beca7c627224aac33584b55b`, SHA-256
   `43699885bbce3343916d4c5c4940cf0e3f9f6f02fdeb46e8655e121b42282ec5`;
 - Minecraft `1.21.1`, NeoForge `21.1.248`, Java `21`;
-- BlueMap backport `5.22-agent.backport-5.22-mc1.21.1-2`, commit
-  `9be321df995a1103808621d529eb72773e719d4d`.
+- BlueMap feature backport
+  `5.22-feature.backport-5.23-stateless-java-web-server-46`, commit
+  `7e07f4e74ec1e92a6ead9aa1e66054af3e133aac`, API commit
+  `285c9a60eff3ac2b0cab308ce1058d1565be0971`.
 
 The route activates only when the installed CobbleFurnies and Athena JARs
 match those exact bytes and all 132 required resources retain their locked
 identities. Any mismatch leaves all blocks on BlueMap's stock path.
 
-The owner accepted and released `0.1.0-alpha.1`. The `0.1.0-alpha.2` candidate
-changes source ownership only: the four exact Athena model primitives now come
-from the released, commit-pinned `bluemap-athena-resource-models`
-`0.1.0-alpha.1` source module. Emitters, profiles, resource admission, routing,
-fallback, and gallery behavior remain local and unchanged.
+The released alpha.2 already compiles the four exact Athena model primitives
+from `bluemap-athena-resource-models` `0.1.0-alpha.1`. Alpha.3 additionally
+compiles the exact BlueMap 5.23 Adapter API pin and removes its local duplicate
+helpers. Emitters, profiles, resource admission, routing, fallback, and gallery
+behavior remain local and unchanged.
 
 ## Visual scope
 
@@ -62,7 +67,8 @@ Clone with `--recurse-submodules`, or initialize an existing checkout with:
 
 ```bash
 git submodule update --init --recursive -- \
-  tooling/bluemap-addon-toolkit modules/bluemap-athena-resource-models
+  tooling/bluemap-addon-toolkit modules/bluemap-addon-adapter-api \
+  modules/bluemap-athena-resource-models
 ```
 
 The settings preflight rejects an uninitialized, changed, dirty, incorrectly
@@ -71,6 +77,7 @@ Java 21, and the exact sibling BlueMap checkout:
 
 ```bash
 gradle --no-daemon \
+  -PbluemapSourcePath=/absolute/path/to/bluemap-backport \
   -PreleaseGate=true \
   -PcobblefurniesJar=/absolute/path/CobbleFurnies-neoforge-1.2.jar \
   -PathenaJar=/absolute/path/athena-neoforge-1.21.1-4.0.6.jar \

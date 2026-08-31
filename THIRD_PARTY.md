@@ -2,10 +2,11 @@
 
 | Component | Use | Exact identity | Declared license | Bundled |
 | --- | --- | --- | --- | --- |
-| BlueMap | Compile/runtime host ABI | Backport `5.22-agent.backport-5.22-mc1.21.1-2`, commit `9be321df995a1103808621d529eb72773e719d4d` | MIT | No |
+| BlueMap | Compile/runtime host ABI | Backport `5.22-feature.backport-5.23-stateless-java-web-server-46`, commit `7e07f4e74ec1e92a6ead9aa1e66054af3e133aac` | MIT | No |
 | CobbleFurnies | Operator-installed JSON, BBS, and texture resources | `CobbleFurnies-neoforge-1.2.jar`, 2,343,464 bytes, SHA-1 `451c445ff636c1e5821f13e3a3f40ee16ecb3342`, SHA-256 `82894965d01bfb00fb6109ac275622a157d415ef0957d41fd6478b6d64ce34f8`; CurseForge `1188698/8340192`; Modrinth `AXY1OO9m/Ynk3uYUi` | MIT, declared by the exact JAR's `META-INF/neoforge.mods.toml` | No |
 | Athena | Exact installed format dependency and compatibility identity | `athena-neoforge-1.21.1-4.0.6.jar`, 99,944 bytes, SHA-1 `4bcbdf388bd5e387beca7c627224aac33584b55b`, SHA-256 `43699885bbce3343916d4c5c4940cf0e3f9f6f02fdeb46e8655e121b42282ec5`; Modrinth `b1ZV3DIJ/dJgL278E` | MIT, declared by the exact JAR | No |
 | BlueMap Chipped Add-on | First-party add-on activation/profile/adapter framework and Athena CTM implementation reuse | commit `c474a82b6bfd1b4173d119cb1e053a5458167e4b` | MIT | Source adapted into this project under MIT; no artifact bundled |
+| BlueMap Add-on Adapter API | First-party BlueMap 5.23 adapter primitives | `0.1.0-alpha.2`, commit `e81f08bc4bfbf02d810ec8949a019130e2e61634`, source tree `2f974c9bb2ba13888d69682f86f30f58922d30eb` | MIT | Four sources compiled into this add-on; module JAR not nested or installed |
 | BlueMap Athena Resource Models | First-party pure connection/face model source | `0.1.0-alpha.1`, commit `4a503a63f7f10b7c414c6c1228207a5ba00bfd54`, source tree `882689c2f9a0875547f4e30aefd68659103d5046` | MIT | Four sources compiled into this add-on; module JAR not nested or installed |
 | JetBrains annotations | Compile-only dependency | `23.0.0` | Apache-2.0 | No |
 | JUnit | Tests | `5.11.4` | EPL-2.0 | No |

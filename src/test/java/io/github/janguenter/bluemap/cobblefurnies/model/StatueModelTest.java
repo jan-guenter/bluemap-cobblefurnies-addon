@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import de.bluecolored.bluemap.core.util.Direction;
-import io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap522.StatueMeshEmitterAccess;
+import io.github.janguenter.bluemap.cobblefurnies.adapter.bluemap523.StatueMeshEmitterAccess;
 import io.github.janguenter.bluemap.cobblefurnies.model.StatueModel.Vec3;
 import org.junit.jupiter.api.Test;
 

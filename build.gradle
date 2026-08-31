@@ -15,7 +15,10 @@ base {
 }
 
 sourceSets {
-    main.java.srcDir 'modules/bluemap-athena-resource-models/src/main/java'
+    main.java.srcDirs(
+            'modules/bluemap-addon-adapter-api/src/main/java',
+            'modules/bluemap-athena-resource-models/src/main/java'
+    )
 }
 
 repositories {
@@ -107,6 +110,19 @@ tasks.named('sourcesJar', Jar).configure {
 
 def productionJar = tasks.named('jar', Jar).flatMap { it.archiveFile }
 def publishedSourcesJar = tasks.named('sourcesJar', Jar).flatMap { it.archiveFile }
+def sharedAdapterPackage = 'io/github/janguenter/bluemap/addon/adapter/api/bluemap523/'
+def sharedAdapterClasses = [
+        'BlueMapRuntimeCompatibility.class',
+        'RegistryGuard.class',
+        'ResourceExtensionType.class',
+        'SyntheticDispatch.class'
+].collect { sharedAdapterPackage + it }
+def sharedAdapterSources = [
+        'BlueMapRuntimeCompatibility.java',
+        'RegistryGuard.java',
+        'ResourceExtensionType.java',
+        'SyntheticDispatch.java'
+].collect { sharedAdapterPackage + it }
 def sharedAthenaPackage = 'io/github/janguenter/bluemap/resource/athena/model/'
 def sharedAthenaClasses = [
         "${sharedAthenaPackage}CtmConnections.class",
@@ -131,6 +147,14 @@ def legacyAthenaClasses = [
 def legacyAthenaSources = legacyAthenaClasses.collect {
     it.replace('.class', '.java').replace('$Vec.java', '.java')
 }.unique()
+def sharedClasses = sharedAdapterClasses + sharedAthenaClasses
+def sharedSources = sharedAdapterSources + sharedAthenaSources
+def legacyAdapterPackage =
+        'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap522/'
+def displacedAdapterHelpers = [
+        'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap523/AdapterCompatibility',
+        'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap523/CobbleFurniesResourceExtensionType'
+]
 tasks.register('verifyProductionJar') {
     dependsOn tasks.named('jar')
     inputs.file(productionJar)
@@ -153,9 +177,9 @@ tasks.register('verifyProductionJar') {
                     'META-INF/NOTICE-bluemap-cobblefurnies-addon.md',
                     'META-INF/THIRD_PARTY-bluemap-cobblefurnies-addon.md',
                     'META-INF/bluemap-cobblefurnies/upstreams.json'
-            ] + sharedAthenaClasses
+            ] + sharedClasses
             def missing = required.findAll { !entries.contains(it) }
-            def duplicateShared = sharedAthenaClasses.findAll { shared ->
+            def duplicateShared = sharedClasses.findAll { shared ->
                 entries.count { it == shared } != 1
             }
             if (!missing.isEmpty() || !duplicateShared.isEmpty()) {
@@ -175,9 +199,9 @@ tasks.register('verifyProductionJar') {
                 throw new GradleException('BlueMap add-on metadata mismatch')
             }
             def foreignClasses = entries.findAll {
-                it.endsWith('.class')
-                        && !it.startsWith('io/github/janguenter/bluemap/cobblefurnies/')
-                        && !sharedAthenaClasses.contains(it)
+                        it.endsWith('.class')
+                                && !it.startsWith('io/github/janguenter/bluemap/cobblefurnies/')
+                        && !sharedClasses.contains(it)
             }
             def forbidden = archiveEntries.findAll {
                 it.endsWith('.jar')
@@ -194,7 +218,12 @@ tasks.register('verifyProductionJar') {
                         || it.startsWith('de/maxhenkel/')
                         || it.startsWith('net/minecraft/')
                         || it.startsWith('net/neoforged/')
+                        || it.startsWith(legacyAdapterPackage)
+                        || displacedAdapterHelpers.any { helper -> it.startsWith(helper) }
                         || legacyAthenaClasses.contains(it)
+                        || (it.startsWith(sharedAdapterPackage)
+                            && it != sharedAdapterPackage
+                            && !sharedAdapterClasses.contains(it))
                         || (it.startsWith(sharedAthenaPackage)
                             && it != sharedAthenaPackage
                             && !sharedAthenaClasses.contains(it))
@@ -231,7 +260,7 @@ tasks.register('verifySourcesJar') {
             def entries = zip.entries().findAll { !it.directory }.collect { it.name }
             def required = [
                     'io/github/janguenter/bluemap/cobblefurnies/BlueMapCobbleFurniesAddon.java',
-                    'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap522/CobbleFurniesRenderer.java',
+                    'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap523/CobbleFurniesRenderer.java',
                     'bluemap.addon.json',
                     'bluemap-cobblefurnies/profiles/exact-artifacts.json',
                     'bluemap-cobblefurnies/profiles/cobblefurnies/1.2-athena-4.0.6/profile.json',
@@ -242,9 +271,9 @@ tasks.register('verifySourcesJar') {
                     'META-INF/NOTICE-bluemap-cobblefurnies-addon.md',
                     'META-INF/THIRD_PARTY-bluemap-cobblefurnies-addon.md',
                     'META-INF/bluemap-cobblefurnies/upstreams.json'
-            ] + sharedAthenaSources
+            ] + sharedSources
             def missing = required.findAll { !entries.contains(it) }
-            def duplicateShared = sharedAthenaSources.findAll { shared ->
+            def duplicateShared = sharedSources.findAll { shared ->
                 entries.count { it == shared } != 1
             }
             if (!missing.isEmpty() || !duplicateShared.isEmpty()) {
@@ -256,7 +285,7 @@ tasks.register('verifySourcesJar') {
             def projectJava = entries.findAll { it.endsWith('.java') }
             def foreignJava = projectJava.findAll {
                 !it.startsWith('io/github/janguenter/bluemap/cobblefurnies/')
-                        && !sharedAthenaSources.contains(it)
+                        && !sharedSources.contains(it)
             }
             def forbidden = archiveEntries.findAll {
                 it.endsWith('.class')
@@ -271,7 +300,12 @@ tasks.register('verifySourcesJar') {
                         || it.startsWith('de/maxhenkel/')
                         || it.startsWith('net/minecraft/')
                         || it.startsWith('net/neoforged/')
+                        || it.startsWith(legacyAdapterPackage)
+                        || displacedAdapterHelpers.any { helper -> it == "${helper}.java" }
                         || legacyAthenaSources.contains(it)
+                        || (it.startsWith(sharedAdapterPackage)
+                            && it != sharedAdapterPackage
+                            && !sharedAdapterSources.contains(it))
                         || (it.startsWith(sharedAthenaPackage)
                             && it != sharedAthenaPackage
                             && !sharedAthenaSources.contains(it))
