@@ -222,6 +222,7 @@ tasks.register('verifyProductionJar') {
                         || displacedAdapterHelpers.any { helper -> it.startsWith(helper) }
                         || legacyAthenaClasses.contains(it)
                         || (it.startsWith(sharedAdapterPackage)
+                            && it != sharedAdapterPackage
                             && !sharedAdapterClasses.contains(it))
                         || (it.startsWith(sharedAthenaPackage)
                             && it != sharedAthenaPackage
@@ -303,6 +304,7 @@ tasks.register('verifySourcesJar') {
                         || displacedAdapterHelpers.any { helper -> it == "${helper}.java" }
                         || legacyAthenaSources.contains(it)
                         || (it.startsWith(sharedAdapterPackage)
+                            && it != sharedAdapterPackage
                             && !sharedAdapterSources.contains(it))
                         || (it.startsWith(sharedAthenaPackage)
                             && it != sharedAthenaPackage

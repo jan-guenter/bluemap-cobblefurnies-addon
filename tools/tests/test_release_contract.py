@@ -116,7 +116,7 @@ class ReleaseContractTest(unittest.TestCase):
     def test_adapted_athena_emitter_discloses_first_party_mit_origin(self) -> None:
         source = (ROOT / (
             "src/main/java/io/github/janguenter/bluemap/cobblefurnies/"
-            "adapter/bluemap522/AthenaQuadEmitter.java"
+            "adapter/bluemap523/AthenaQuadEmitter.java"
         )).read_text()
         self.assertIn("Project-authored MIT adaptation", source)
         self.assertIn("first-party BlueMap Chipped", source)
