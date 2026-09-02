@@ -11,6 +11,8 @@ CobbleFurnies renderer profile for the same exact tuple.
 
 The alpha.3 baseline production JAR is 112,216 bytes with SHA-256
 `93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228`.
+The reproducible alpha.4 candidate is 113,361 bytes with SHA-256
+`f6dc70d6306e4977f270e74527982115746938ca7d4a9152253f4d444f21afb7`.
 
 - CobbleFurnies `1.2`, `CobbleFurnies-neoforge-1.2.jar`, 2,343,464 bytes,
   SHA-1 `451c445ff636c1e5821f13e3a3f40ee16ecb3342`, SHA-256

@@ -12,42 +12,61 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class ReleaseContractTest(unittest.TestCase):
-    def test_alpha3_release_provenance_matches_reproducible_payloads(self) -> None:
+    def test_alpha4_release_provenance_matches_reproducible_payloads(self) -> None:
         release = json.loads((ROOT / "provenance/release.json").read_text())
         self.assertEqual("owner-accepted-release-candidate", release["status"])
-        self.assertEqual("0.1.0-alpha.3", release["version"])
-        self.assertEqual("v0.1.0-alpha.3", release["tag"])
+        self.assertEqual("0.1.0-alpha.4", release["version"])
+        self.assertEqual("v0.1.0-alpha.4", release["tag"])
         self.assertEqual(
             {
                 "production_jar": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.jar",
-                    "size": 112_216,
-                    "sha256": "93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4.jar",
+                    "size": 113_361,
+                    "sha256": "f6dc70d6306e4977f270e74527982115746938ca7d4a9152253f4d444f21afb7",
                 },
                 "sources_jar": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3-sources.jar",
-                    "size": 57_730,
-                    "sha256": "4fecea9c8c29bbd96a6b634f44c15dad087d0beac24d46dd859707b4d75c9556",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4-sources.jar",
+                    "size": 58_879,
+                    "sha256": "2c9b42e260f4eeee0d4490aedd855f4d3dd3bf975b9debd6ccaab0d7a56fc1aa",
                 },
                 "pom": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.pom",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4.pom",
                     "size": 1_407,
-                    "sha256": "a32a194a0bc262fff43d87d0831975875260239e8548e14d0a6a901d1e8cab12",
+                    "sha256": "9a2f1d99bc609e7ce09515c1a7feb5fe2af2012c947ee04e62716334d08b7555",
                 },
                 "gradle_module": {
-                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.3.module.json",
+                    "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4.module.json",
                     "size": 2_861,
-                    "sha256": "64165e3fe78209689f6af01d2745ac4518e068d23b778dd500bf84c52b8a71ba",
+                    "sha256": "597d21c413f596bddba401429b5a58ce0cc695d4f1a6dc7574a5ae6779b1a66b",
                 },
             },
             release["candidate_artifacts"],
         )
         self.assertEqual(release["candidate_artifacts"],
                          release["final_release_artifacts"])
-        migration = release["athena_model_module"]
+        migration = release["athena_model_source"]
         self.assertEqual(
             "4a503a63f7f10b7c414c6c1228207a5ba00bfd54",
-            migration["release_target_commit"],
+            migration["module_release_commit"],
+        )
+        render_core = release["render_core_migration"]
+        self.assertEqual(
+            "24b84efdc8235f3f1323e1a8e9fd033080e3a79e",
+            render_core["module_release_commit"],
+        )
+        self.assertEqual(
+            "1cc6589bac47c8992b33db630baa556add781edda226e95734bda10952aae5cf",
+            render_core["source_parity"]["normalized_sha256"],
+        )
+        self.assertTrue(render_core["source_parity"][
+            "equal_after_package_and_visibility_normalization"
+        ])
+        self.assertTrue(render_core["bytecode_parity"][
+            "all_affected_classes_equal_after_normalization"
+        ])
+        self.assertEqual(
+            release["preserved_contract"]["gallery_tree_before"],
+            release["preserved_contract"]["gallery_tree_after"],
         )
         self.assertFalse(release["preserved_contract"][
             "runtime_profile_and_renderer_behavior_changed"
@@ -106,6 +125,17 @@ class ReleaseContractTest(unittest.TestCase):
                          adapter["commit"])
         self.assertEqual("2f974c9bb2ba13888d69682f86f30f58922d30eb",
                          adapter["source_tree"])
+        render_core = provenance["shared_render_core_module"]
+        self.assertEqual("0.1.0-alpha.2", render_core["version"])
+        self.assertEqual(
+            "24b84efdc8235f3f1323e1a8e9fd033080e3a79e",
+            render_core["commit"],
+        )
+        self.assertEqual(
+            "424040931680fb82d37693f893ca887c0ed48eae",
+            render_core["source_tree"],
+        )
+        self.assertFalse(render_core["artifact_bundled"])
 
     def test_ci_requires_exact_inputs_and_never_mentions_inherited_chipped_input(self) -> None:
         workflow = (ROOT / ".github/workflows/ci.yml").read_text()
