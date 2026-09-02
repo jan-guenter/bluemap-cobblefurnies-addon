@@ -17,7 +17,8 @@ base {
 sourceSets {
     main.java.srcDirs(
             'modules/bluemap-addon-adapter-api/src/main/java',
-            'modules/bluemap-athena-resource-models/src/main/java'
+            'modules/bluemap-athena-resource-models/src/main/java',
+            'modules/bluemap-addon-render-core/src/main/java'
     )
 }
 
@@ -147,8 +148,25 @@ def legacyAthenaClasses = [
 def legacyAthenaSources = legacyAthenaClasses.collect {
     it.replace('.class', '.java').replace('$Vec.java', '.java')
 }.unique()
-def sharedClasses = sharedAdapterClasses + sharedAthenaClasses
-def sharedSources = sharedAdapterSources + sharedAthenaSources
+def sharedRenderCoreRoot =
+        'io/github/janguenter/bluemap/addon/render/core/adapter/'
+def sharedRenderCorePackage = "${sharedRenderCoreRoot}bluemap523/"
+def sharedRenderCoreClasses = [
+        "${sharedRenderCorePackage}FaceLighting.class",
+        "${sharedRenderCorePackage}FaceLighting\$Sample.class"
+].collect { it.toString() }
+def sharedRenderCoreSources = [
+        "${sharedRenderCorePackage}FaceLighting.java"
+].collect { it.toString() }
+def legacyRenderCoreClasses = [
+        'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap523/FaceLighting.class',
+        'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap523/FaceLighting$Sample.class'
+]
+def legacyRenderCoreSources = [
+        'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap523/FaceLighting.java'
+]
+def sharedClasses = sharedAdapterClasses + sharedAthenaClasses + sharedRenderCoreClasses
+def sharedSources = sharedAdapterSources + sharedAthenaSources + sharedRenderCoreSources
 def legacyAdapterPackage =
         'io/github/janguenter/bluemap/cobblefurnies/adapter/bluemap522/'
 def displacedAdapterHelpers = [
@@ -221,12 +239,15 @@ tasks.register('verifyProductionJar') {
                         || it.startsWith(legacyAdapterPackage)
                         || displacedAdapterHelpers.any { helper -> it.startsWith(helper) }
                         || legacyAthenaClasses.contains(it)
+                        || legacyRenderCoreClasses.contains(it)
                         || (it.startsWith(sharedAdapterPackage)
                             && it != sharedAdapterPackage
                             && !sharedAdapterClasses.contains(it))
                         || (it.startsWith(sharedAthenaPackage)
                             && it != sharedAthenaPackage
                             && !sharedAthenaClasses.contains(it))
+                        || (it.startsWith(sharedRenderCoreRoot) && !it.endsWith('/')
+                            && !sharedRenderCoreClasses.contains(it))
             }
             if (!foreignClasses.isEmpty() || !forbidden.isEmpty()) {
                 throw new GradleException(
@@ -303,12 +324,15 @@ tasks.register('verifySourcesJar') {
                         || it.startsWith(legacyAdapterPackage)
                         || displacedAdapterHelpers.any { helper -> it == "${helper}.java" }
                         || legacyAthenaSources.contains(it)
+                        || legacyRenderCoreSources.contains(it)
                         || (it.startsWith(sharedAdapterPackage)
                             && it != sharedAdapterPackage
                             && !sharedAdapterSources.contains(it))
                         || (it.startsWith(sharedAthenaPackage)
                             && it != sharedAthenaPackage
                             && !sharedAthenaSources.contains(it))
+                        || (it.startsWith(sharedRenderCoreRoot) && !it.endsWith('/')
+                            && !sharedRenderCoreSources.contains(it))
             }
             if (projectJava.isEmpty() || !foreignJava.isEmpty() || !forbidden.isEmpty()) {
                 throw new GradleException(

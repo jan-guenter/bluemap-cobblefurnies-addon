@@ -8,6 +8,7 @@
 | BlueMap Chipped Add-on | First-party add-on activation/profile/adapter framework and Athena CTM implementation reuse | commit `c474a82b6bfd1b4173d119cb1e053a5458167e4b` | MIT | Source adapted into this project under MIT; no artifact bundled |
 | BlueMap Add-on Adapter API | First-party BlueMap 5.23 adapter primitives | `0.1.0-alpha.2`, commit `e81f08bc4bfbf02d810ec8949a019130e2e61634`, source tree `2f974c9bb2ba13888d69682f86f30f58922d30eb` | MIT | Four sources compiled into this add-on; module JAR not nested or installed |
 | BlueMap Athena Resource Models | First-party pure connection/face model source | `0.1.0-alpha.1`, commit `4a503a63f7f10b7c414c6c1228207a5ba00bfd54`, source tree `882689c2f9a0875547f4e30aefd68659103d5046` | MIT | Four sources compiled into this add-on; module JAR not nested or installed |
+| BlueMap Add-on Render Core | First-party BlueMap 5.23 face-light source | `0.1.0-alpha.2`, commit `24b84efdc8235f3f1323e1a8e9fd033080e3a79e`, source tree `424040931680fb82d37693f893ca887c0ed48eae` | MIT | One source compiled into this add-on; module JAR not nested or installed |
 | JetBrains annotations | Compile-only dependency | `23.0.0` | Apache-2.0 | No |
 | JUnit | Tests | `5.11.4` | EPL-2.0 | No |
 | Checkstyle | Source style | `10.18.2` | LGPL-2.1-or-later | No |

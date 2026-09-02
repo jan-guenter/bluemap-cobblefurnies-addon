@@ -9,12 +9,17 @@ pluginManagement {
     def athenaModelsPath = 'modules/bluemap-athena-resource-models'
     def expectedAthenaModelsCommit = '4a503a63f7f10b7c414c6c1228207a5ba00bfd54'
     def expectedAthenaModelsSourceTree = '882689c2f9a0875547f4e30aefd68659103d5046'
+    def renderCorePath = 'modules/bluemap-addon-render-core'
+    def expectedRenderCoreCommit = '24b84efdc8235f3f1323e1a8e9fd033080e3a79e'
+    def expectedRenderCoreSourceTree = '424040931680fb82d37693f893ca887c0ed48eae'
     def consumerRoot = settings.settingsDir
     def toolkit = new File(consumerRoot, toolkitPath)
     def adapterApi = new File(consumerRoot, adapterApiPath)
     def adapterApiSource = new File(adapterApi, 'src/main/java')
     def athenaModels = new File(consumerRoot, athenaModelsPath)
     def athenaModelsSource = new File(athenaModels, 'src/main/java')
+    def renderCore = new File(consumerRoot, renderCorePath)
+    def renderCoreSource = new File(renderCore, 'src/main/java')
 
     if (!(expectedToolkitCommit ==~ /[0-9a-f]{40}/)
             || !new File(consumerRoot, '.git').exists()
@@ -43,6 +48,16 @@ pluginManagement {
         throw new GradleException(
                 'Athena model trust preflight is not configured or initialized. '
                         + "Run: git submodule update --init --recursive -- ${athenaModelsPath}"
+        )
+    }
+    if (!(expectedRenderCoreCommit ==~ /[0-9a-f]{40}/)
+            || !(expectedRenderCoreSourceTree ==~ /[0-9a-f]{40}/)
+            || !renderCore.isDirectory()
+            || !new File(renderCore, '.git').exists()
+            || !renderCoreSource.isDirectory()) {
+        throw new GradleException(
+                'Render-core trust preflight is not configured or initialized. '
+                        + "Run: git submodule update --init --recursive -- ${renderCorePath}"
         )
     }
 
@@ -155,6 +170,39 @@ pluginManagement {
             || !athenaModelsStatus.isEmpty()) {
         throw new GradleException(
                 'Athena model HEAD/source tree differs from the pin or is dirty'
+        )
+    }
+
+    def renderCoreTree = trustedGitOutput(consumerRoot,
+            ['ls-tree', 'HEAD', '--', renderCorePath],
+            'read the committed render-core gitlink').tokenize(' \t')
+    def renderCoreIndex = trustedGitOutput(consumerRoot,
+            ['ls-files', '--stage', '--', renderCorePath],
+            'read the indexed render-core gitlink').tokenize(' \t')
+    if (renderCoreTree.size() != 4 || renderCoreTree[0] != '160000'
+            || renderCoreTree[1] != 'commit'
+            || renderCoreTree[2] != expectedRenderCoreCommit
+            || renderCoreTree[3] != renderCorePath
+            || renderCoreIndex.size() != 4 || renderCoreIndex[0] != '160000'
+            || renderCoreIndex[1] != expectedRenderCoreCommit
+            || renderCoreIndex[2] != '0' || renderCoreIndex[3] != renderCorePath) {
+        throw new GradleException(
+                'Committed/indexed render-core gitlink does not match its pin'
+        )
+    }
+
+    def renderCoreHead = trustedGitOutput(renderCore,
+            ['rev-parse', '--verify', 'HEAD^{commit}'], 'read render-core HEAD')
+    def renderCoreTreeHash = trustedGitOutput(renderCore,
+            ['rev-parse', 'HEAD:src/main/java'], 'read render-core source tree')
+    def renderCoreStatus = trustedGitOutput(renderCore,
+            ['status', '--porcelain=v1', '--untracked-files=all',
+             '--ignore-submodules=none'], 'verify the render-core worktree')
+    if (renderCoreHead != expectedRenderCoreCommit
+            || renderCoreTreeHash != expectedRenderCoreSourceTree
+            || !renderCoreStatus.isEmpty()) {
+        throw new GradleException(
+                'Render-core HEAD/source tree differs from the pin or is dirty'
         )
     }
 

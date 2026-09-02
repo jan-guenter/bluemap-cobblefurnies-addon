@@ -5,11 +5,14 @@ five static CobbleFurnies statues installed by All the Mons 1.2.0.
 
 ## Status and compatibility
 
-Version `0.1.0-alpha.3` is the owner-accepted BlueMap 5.23 adapter migration
-release candidate for the same exact tuple:
+Version `0.1.0-alpha.4` moves the exact face-light sampler into the shared
+BlueMap 5.23 render-core source package. It preserves the owner-accepted
+CobbleFurnies renderer profile for the same exact tuple.
 
-The candidate production JAR is 112,216 bytes with SHA-256
+The alpha.3 baseline production JAR is 112,216 bytes with SHA-256
 `93ebd74db8ee2ac8b552958e6ae49c39625a504d7501463f5ec08a3efef28228`.
+The reproducible alpha.4 candidate is 113,361 bytes with SHA-256
+`f6dc70d6306e4977f270e74527982115746938ca7d4a9152253f4d444f21afb7`.
 
 - CobbleFurnies `1.2`, `CobbleFurnies-neoforge-1.2.jar`, 2,343,464 bytes,
   SHA-1 `451c445ff636c1e5821f13e3a3f40ee16ecb3342`, SHA-256
@@ -27,11 +30,13 @@ The route activates only when the installed CobbleFurnies and Athena JARs
 match those exact bytes and all 132 required resources retain their locked
 identities. Any mismatch leaves all blocks on BlueMap's stock path.
 
-The released alpha.2 already compiles the four exact Athena model primitives
-from `bluemap-athena-resource-models` `0.1.0-alpha.1`. Alpha.3 additionally
-compiles the exact BlueMap 5.23 Adapter API pin and removes its local duplicate
-helpers. Emitters, profiles, resource admission, routing, fallback, and gallery
-behavior remain local and unchanged.
+The release compiles the four exact Athena model primitives from
+`bluemap-athena-resource-models` `0.1.0-alpha.1`, four exact BlueMap 5.23
+Adapter API primitives from `bluemap-addon-adapter-api` `0.1.0-alpha.2`, and
+the face-light sampler from `bluemap-addon-render-core` `0.1.0-alpha.2` at
+commit `24b84efdc8235f3f1323e1a8e9fd033080e3a79e`, source tree
+`424040931680fb82d37693f893ca887c0ed48eae`. Emitters, profiles, resource
+admission, routing, fallback, and gallery behavior remain local and unchanged.
 
 ## Visual scope
 
@@ -68,7 +73,7 @@ Clone with `--recurse-submodules`, or initialize an existing checkout with:
 ```bash
 git submodule update --init --recursive -- \
   tooling/bluemap-addon-toolkit modules/bluemap-addon-adapter-api \
-  modules/bluemap-athena-resource-models
+  modules/bluemap-athena-resource-models modules/bluemap-addon-render-core
 ```
 
 The settings preflight rejects an uninitialized, changed, dirty, incorrectly
@@ -87,8 +92,9 @@ gradle --no-daemon \
 
 CI downloads both exact inputs to temporary storage, verifies their complete
 byte/resource contract, and discards them. The production and sources JARs
-contain no CobbleFurnies or Athena classes, models, textures, installed BBS
-files, or derived meshes.
+contain only the admitted first-party shared sources alongside this add-on's
+classes and resources. They contain no CobbleFurnies or Athena classes,
+models, textures, installed BBS files, derived meshes, or nested module JARs.
 
 Tagged releases publish the production JAR, sources JAR, POM, and Gradle
 module metadata under
@@ -107,9 +113,9 @@ data.
 ## License and provenance
 
 The add-on is released under the [MIT License](LICENSE). Four exact Athena CTM
-model primitives are source-bundled from the owner's released MIT
-`bluemap-athena-resource-models` module. The BlueMap add-on framework and
-emitter retain their recorded Chipped origin; CobbleFurnies-specific
+model primitives, four adapter primitives, and one face-light sampler are
+source-bundled from the owner's released MIT modules. The BlueMap add-on
+framework and emitter retain their recorded Chipped origin. CobbleFurnies-specific
 profile/data/orchestration and the bounded BBS/statue path remain local. No
 exact third-party upstream source correlation is asserted. See
 [THIRD_PARTY.md](THIRD_PARTY.md),

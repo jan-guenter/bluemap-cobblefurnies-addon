@@ -36,10 +36,10 @@ lifecycle/update, and verification of all 71 states, five lower block entities,
 and five upper non-block-entities. The required lightweight agent BlueMap
 sanity check passed against the fresh 1600-by-1100 screenshot (99,313 bytes,
 SHA-256 `84bb13ef0889563b8fd281bfbf5164ec7f8724731e8f969dc453f21ec110e5e6`).
-Owner visual acceptance passed for that exact gallery. The
-`0.1.0-alpha.2` candidate changes only source ownership and inherits the
-accepted visual scope; its exact four release payloads and combined runtime
-cohort still require their independent gates.
+Owner visual acceptance passed for that exact gallery. The alpha.4 candidate
+changes only `FaceLighting` source ownership and its
+package. It inherits the accepted visual scope after package-normalized source
+and bytecode parity, unchanged gallery checks, and the complete add-on gate.
 
 BlueMap host lighting is expected to differ from Minecraft client
 `entityCutoutNoCull` lighting. Staging acceptance targets geometry, UVs,

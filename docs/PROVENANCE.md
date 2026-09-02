@@ -38,3 +38,13 @@ is not installed or nested. CobbleFurnies-specific profile data/orchestration
 and the bounded BBS interpreter/statue path remain local. Neither published
 JAR contains third-party CobbleFurnies or Athena source, classes, models,
 textures, BBS files, captures, or derived meshes.
+
+Version `0.1.0-alpha.4` also source-bundles the exact first-party
+`FaceLighting` class from the MIT `bluemap-addon-render-core`
+`0.1.0-alpha.2` release at commit
+`24b84efdc8235f3f1323e1a8e9fd033080e3a79e`, source tree
+`424040931680fb82d37693f893ca887c0ed48eae`. Package and public API
+visibility are the only differences from the removed local class. After
+normalization, both sources have SHA-256
+`1cc6589bac47c8992b33db630baa556add781edda226e95734bda10952aae5cf`.
+The module JAR is neither installed nor nested.
