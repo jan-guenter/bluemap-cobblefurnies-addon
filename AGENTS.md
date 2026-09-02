@@ -12,6 +12,7 @@ directory tracked by the root orchestration repository.
 | Minecraft / NeoForge / Java | `1.21.1` / `21.1.248` / `21` |
 | BlueMap | `5.22-feature.backport-5.23-stateless-java-web-server-46`, commit `7e07f4e74ec1e92a6ead9aa1e66054af3e133aac`, API `285c9a60eff3ac2b0cab308ce1058d1565be0971` |
 | Adapter API source module | `0.1.0-alpha.2`, commit `e81f08bc4bfbf02d810ec8949a019130e2e61634`, source tree `2f974c9bb2ba13888d69682f86f30f58922d30eb` |
+| Render-core source module | `0.1.0-alpha.2`, commit `24b84efdc8235f3f1323e1a8e9fd033080e3a79e`, source tree `424040931680fb82d37693f893ca887c0ed48eae` |
 | CobbleFurnies | `1.2`, 2,343,464 bytes, SHA-256 `82894965d01bfb00fb6109ac275622a157d415ef0957d41fd6478b6d64ce34f8` |
 | Athena | `4.0.6`, 99,944 bytes, SHA-256 `43699885bbce3343916d4c5c4940cf0e3f9f6f02fdeb46e8655e121b42282ec5` |
 | Athena model source module | `0.1.0-alpha.1`, commit `4a503a63f7f10b7c414c6c1228207a5ba00bfd54`, source tree `882689c2f9a0875547f4e30aefd68659103d5046` |
@@ -43,6 +44,8 @@ visual-review task.
   into this add-on and is never installed as a provider or nested JAR.
 - Keep the released Adapter API source module pinned exactly under the same
   compile-in, no-provider, no-nested-JAR boundary.
+- Keep the released render-core source module pinned exactly. Compile its
+  `FaceLighting` source into this add-on and reject the removed local class.
 
 ## Validation
 
@@ -52,7 +55,7 @@ closed if either is absent:
 ```bash
 git submodule update --init --recursive -- \
   tooling/bluemap-addon-toolkit modules/bluemap-addon-adapter-api \
-  modules/bluemap-athena-resource-models
+  modules/bluemap-athena-resource-models modules/bluemap-addon-render-core
 python3 gallery/generate.py --check
 (cd gallery && sha256sum --check SHA256SUMS)
 python3 -m unittest discover -s tools/tests -p 'test_*.py'

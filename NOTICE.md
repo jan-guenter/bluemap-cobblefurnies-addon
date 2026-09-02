@@ -18,6 +18,13 @@ Four BlueMap 5.23 adapter primitives are source-bundled from the MIT
 `bluemap-addon-adapter-api` `0.1.0-alpha.2` exact gitlink pin. Its standalone
 module JAR is neither nested nor installed at runtime.
 
+The face-light sampler is source-bundled from Jan Guenter's MIT
+`bluemap-addon-render-core` `0.1.0-alpha.2` release at commit
+`24b84efdc8235f3f1323e1a8e9fd033080e3a79e`, source tree
+`424040931680fb82d37693f893ca887c0ed48eae`. Only its package and API
+visibility differ from CobbleFurnies' removed local class. The module JAR is
+neither nested nor installed at runtime.
+
 No CobbleFurnies or Athena binary, class, source, model, texture, BBS resource,
 capture, or derived mesh is included. Names, identifiers, resource paths,
 sizes, and cryptographic digests describe compatibility and verify

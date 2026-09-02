@@ -38,8 +38,10 @@ selects the Athena CTM role for four quadrants, and suppresses faces against
 the same block ID. Its four pure connection/face primitives are compiled from
 the exact pinned `bluemap-athena-resource-models` source module. Carpet CTM
 uses the installed one-sixteenth-high shape, four side faces, and connected
-top/bottom surfaces. Emission, lighting, resource admission, profile data, and
-orchestration remain project-owned and local.
+top/bottom surfaces. Both the CTM and statue emitters call the exact
+`FaceLighting` source compiled from the pinned `bluemap-addon-render-core`
+module. Emission, resource admission, profile data, and orchestration remain
+project-owned and local.
 
 ## Static statues
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-alpha.4 - 2026-09-02
+
+- Source-bundle `FaceLighting` from `bluemap-addon-render-core`
+  `0.1.0-alpha.2` at commit
+  `24b84efdc8235f3f1323e1a8e9fd033080e3a79e` and remove the local duplicate.
+- Preserve the accepted CobbleFurnies emitters, profile, gallery, routes,
+  fallback, connected textures, and statue behavior.
+- Reject a missing, changed, dirty, incorrectly pinned, or source-tree-mismatched
+  render-core checkout. Reject its standalone JAR, the removed local class,
+  and every unexpected render-core class from both publication JARs.
+
 ## 0.1.0-alpha.3 - 2026-08-31
 
 - Target only BlueMap feature-backport commit
