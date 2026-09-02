@@ -7,28 +7,6 @@
   "repository": "https://github.com/jan-guenter/bluemap-cobblefurnies-addon",
   "tag": "v0.1.0-alpha.4",
   "maven_coordinate": "io.github.jan-guenter:bluemap-cobblefurnies-addon:0.1.0-alpha.4",
-  "candidate_artifacts": {
-    "production_jar": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4.jar",
-      "size": 113361,
-      "sha256": "f6dc70d6306e4977f270e74527982115746938ca7d4a9152253f4d444f21afb7"
-    },
-    "sources_jar": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4-sources.jar",
-      "size": 58879,
-      "sha256": "2c9b42e260f4eeee0d4490aedd855f4d3dd3bf975b9debd6ccaab0d7a56fc1aa"
-    },
-    "pom": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4.pom",
-      "size": 1407,
-      "sha256": "9a2f1d99bc609e7ce09515c1a7feb5fe2af2012c947ee04e62716334d08b7555"
-    },
-    "gradle_module": {
-      "file_name": "bluemap-cobblefurnies-addon-0.1.0-alpha.4.module.json",
-      "size": 2861,
-      "sha256": "597d21c413f596bddba401429b5a58ce0cc695d4f1a6dc7574a5ae6779b1a66b"
-    }
-  },
   "baseline_release": {
     "version": "0.1.0-alpha.3",
     "tag": "v0.1.0-alpha.3",
@@ -45,7 +23,7 @@
     "visual_acceptance": true,
     "scope": "The accepted CobbleFurnies profile, emitters, renderer, gallery, routes and fallback remain unchanged. Alpha.4 relocates only the bytecode-equivalent face-light sampler."
   },
-  "render_core_migration": {
+  "render_core_523_migration": {
     "implementation_commit": "2a2d234947bf98ec1c747e218c62d79b5acebdc1",
     "implementation_tree": "0a4c56bf3cb92abdcfd6c3a82c876c78c7a37c1d",
     "module_repository": "https://github.com/jan-guenter/bluemap-addon-render-core",

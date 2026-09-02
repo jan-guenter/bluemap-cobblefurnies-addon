@@ -40,16 +40,15 @@ class ReleaseContractTest(unittest.TestCase):
                     "sha256": "597d21c413f596bddba401429b5a58ce0cc695d4f1a6dc7574a5ae6779b1a66b",
                 },
             },
-            release["candidate_artifacts"],
+            release["final_release_artifacts"],
         )
-        self.assertEqual(release["candidate_artifacts"],
-                         release["final_release_artifacts"])
+        self.assertNotIn("candidate_artifacts", release)
         migration = release["athena_model_source"]
         self.assertEqual(
             "4a503a63f7f10b7c414c6c1228207a5ba00bfd54",
             migration["module_release_commit"],
         )
-        render_core = release["render_core_migration"]
+        render_core = release["render_core_523_migration"]
         self.assertEqual(
             "24b84efdc8235f3f1323e1a8e9fd033080e3a79e",
             render_core["module_release_commit"],
